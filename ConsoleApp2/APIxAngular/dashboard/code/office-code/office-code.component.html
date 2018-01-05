@@ -1,0 +1,131 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="main-heading clearfix">
+            <h3 class="page-heading">Office Code</h3>
+            <dx-button class="button-info btn btn-default btn-green" text="Add New" (onClick)="showPopup()"></dx-button>
+        </div>
+        <div>
+            <dx-data-grid id="gridContainer" [dataSource]="officecodedt" [allowColumnReordering]="true" [allowColumnResizing]="true"
+                [columnAutoWidth]="true">
+                <dxo-editing [allowAdding]="false" [allowUpdating]="false" mode="batch"></dxo-editing>
+                <dxo-grouping [contextMenuEnabled]="true" expandMode="rowClick"></dxo-grouping>
+                <dxo-group-panel [visible]="false" emptyPanelText="Use the context menu of header columns to group data"></dxo-group-panel>
+                <dxo-header-filter [visible]="true">
+                </dxo-header-filter>
+                <dxo-selection mode="multiple">
+                </dxo-selection>
+                <dxo-filter-row [visible]="showFilterRow">
+                </dxo-filter-row>
+                <dxi-column dataField="OfficeCode"></dxi-column>
+                <dxi-column dataField="OfficeName"></dxi-column>
+                <dxi-column dataField="OfficeKey" [visible]="false"></dxi-column>
+                <dxi-column dataField="SupervisorName"></dxi-column>
+                <dxi-column dataField="PhoneNo"></dxi-column>
+                <dxi-column dataField="FaxNo"></dxi-column>                
+                <dxo-paging [pageSize]="10"></dxo-paging>
+                <dxi-column caption="Action" alignment="center" cellTemplate="CellTemplateEdit"></dxi-column>
+                <div *dxTemplate="let data of 'CellTemplateEdit'">
+                    <a href="javascript:void(0)" (click)="GetOfficeDetailByCode(data)">Edit</a>
+                    <!-- <a href="javascript:void()" (click)="ShowConfirmationPopup(data)">Delete</a> -->
+                </div>
+            </dx-data-grid>
+        </div>
+        <!-- <dx-data-grid id="gridContainer" [dataSource]="officecodedt">
+          <dxo-filter-row 
+              [visible]="showFilterRow">
+          </dxo-filter-row>
+          <dxo-header-filter 
+              [visible]="showHeaderFilter">
+          </dxo-header-filter>
+          <dxo-search-panel 
+              [visible]="true" 
+              [width]="240" 
+              placeholder="Search...">
+          </dxo-search-panel>
+          <dxi-column 
+              dataField="OfficeCode"
+              caption="Office Code">
+          </dxi-column> 
+          <dxi-column 
+              dataField="OfficeName"
+              caption="Office Name">
+          </dxi-column> 
+          <dxi-column 
+              dataField="SupervisorName"
+              caption="Supervisor Name">
+          </dxi-column> 
+          <dxi-column 
+              dataField="PhoneNo"
+              caption="PhoneNo">
+          </dxi-column> 
+          <dxi-column 
+              dataField="FaxNo"
+              caption="FaxNo">
+          </dxi-column> 
+          <dxi-column dataField = "OfficeCode" caption="Edit" alignment="center" [width]="100" cellTemplate="CellTemplateEdit"></dxi-column>
+          <dxi-column dataField = "OfficeCode" caption="Delete" alignment="center" [width]="100" cellTemplate="CellTemplateDelete"></dxi-column>
+          <div *dxTemplate="let data of 'CellTemplateEdit'">         
+              <a href="javascript:void()" (click)="GetOfficeDetailByCode(data)">Edit</a>
+          </div>
+          <div *dxTemplate="let data of 'CellTemplateDelete'">         
+              <a href="javascript:void()" (click)="ShowConfirmationPopup(data)">Delete</a>
+          </div>
+      </dx-data-grid>   -->
+    </div>
+</div>
+
+<dx-popup class="popup" [width]="600" [height]="250" [showTitle]="true" title="Add/Edit Currency Details" [dragEnabled]="false"
+    [closeOnOutsideClick]="true" [(visible)]="popupVisible">
+    <div *dxTemplate="let data of 'content'">
+        <form action="your-action" (submit)="onFormSubmit(officedata)">
+            <dx-form id="form" [formData]="officedata" [readOnly]="false" [showColonAfterLabel]="true" [showValidationSummary]="true"
+                validationGroup="customerData">
+                <dxi-item dataField="OfficeCode">
+                    <dxi-validation-rule type="required" message="Office Code is required">
+                    </dxi-validation-rule>
+                </dxi-item>
+                <dxi-item dataField="OfficeName">
+                    <dxi-validation-rule type="required" message="Office Name is required">
+                    </dxi-validation-rule>
+                </dxi-item>
+                <dxi-item dataField="SupervisorName">
+                    <dxi-validation-rule type="required" message="Supervisor Name is required">
+                    </dxi-validation-rule>
+                </dxi-item>
+                <dxi-item dataField="PhoneNo">
+                    <dxi-validation-rule type="required" message="PhoneNo is required">
+                    </dxi-validation-rule>
+                </dxi-item>
+                <dxi-item dataField="FaxNo">
+                    <dxi-validation-rule type="required" message="FaxNo is required">
+                    </dxi-validation-rule>
+                </dxi-item>
+                <dxi-item dataField="OfficeKey">
+                    <dxi-validation-rule type="required" message="OfficeKey is required">
+                    </dxi-validation-rule>
+                </dxi-item>
+            </dx-form>
+            <br />
+            <div class="btn-grp-wrap">
+                <dx-button text="Save" type="success" validationGroup="customerData" [useSubmitBehavior]="true"></dx-button>
+                <dx-button text="Cancel" (onClick)="HidePopup()"></dx-button>
+            </div>
+        </form>
+    </div>
+</dx-popup>
+
+<dx-popup class="popup" [width]="400" [height]="250" [showTitle]="true" title="Confirmation Message" [dragEnabled]="false"
+    [closeOnOutsideClick]="true" [(visible)]="ConfirmationPopup">
+    <div *dxTemplate="let data of 'content'">
+        <form action="your-action">
+            <div class="form-group">
+                <label for="officecode">Are you sure want to delete Office Code?</label>
+            </div>
+            <br />
+            <div class="btn-grp-wrap">
+                <dx-button text="Delete" type="success" (onClick)="DeleteOfficeCode()"></dx-button>
+                <dx-button text="Cancel" (onClick)="HideConfirmationPopup()"></dx-button>
+            </div>
+        </form>
+    </div>
+</dx-popup>

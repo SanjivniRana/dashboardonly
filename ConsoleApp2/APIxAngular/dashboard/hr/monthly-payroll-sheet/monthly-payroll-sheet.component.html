@@ -1,0 +1,113 @@
+
+<br>
+<br>
+
+<div class="row">
+  <div class="col-sm-12">
+    <dx-form id="form"           
+      [readOnly]="false"
+      [showColonAfterLabel]="true"
+      [showValidationSummary]="true"
+      [minColWidth]="233"
+      colCount="auto">
+
+      <dxi-item dataField="Office" caption="Office" editorType="dxSelectBox" [editorOptions]="{ dataSource: officeType, displayExpr: 'OfficeTypeName', valueExpr: 'OfficeTypeId'  }">
+        <dxi-validation-rule type="required" message="Office"></dxi-validation-rule>
+      </dxi-item>
+
+      <dxi-item dataField="Currency" caption="Currency" editorType="dxSelectBox" [editorOptions]="{ dataSource: currencyType, displayExpr: 'CurrencyTypeName', valueExpr: 'CurrencyTypeId'  }">
+        <dxi-validation-rule type="required" message="Currency"></dxi-validation-rule>
+      </dxi-item>
+
+      <dxi-item dataField="Month" >
+          <dxi-validation-rule 
+              type="required"
+              message="Month is required">
+          </dxi-validation-rule>
+          <!-- <dx-date-box [(value)]="date" displayFormat="MM/YYYY" type="date"></dx-date-box>  -->
+      </dxi-item>
+
+      <dxi-item dataField="Employee" caption="Employee" editorType="dxSelectBox" [editorOptions]="{ dataSource: officeType, displayExpr: 'OfficeTypeName', valueExpr: 'OfficeTypeId'  }">
+        <dxi-validation-rule type="required" message="Employee"></dxi-validation-rule>
+      </dxi-item>
+
+      <dxi-item dataField="Project" caption="Project" editorType="dxSelectBox" [editorOptions]="{ dataSource: officeType, displayExpr: 'OfficeTypeName', valueExpr: 'OfficeTypeId'  }">
+        <dxi-validation-rule type="required" message="Project"></dxi-validation-rule>
+      </dxi-item>
+
+      <dxi-item dataField="Job" caption="Job" editorType="dxDateBox" >
+        <dxi-validation-rule type="required" message="Job"></dxi-validation-rule>
+      </dxi-item>
+
+      <dxi-item dataField="B/Line" caption="B/Line" editorType="dxDateBox">
+        <dxi-validation-rule type="required" message="B/Line"></dxi-validation-rule>
+      </dxi-item>
+
+    </dx-form>
+
+    <div class="btn"  align="center">
+      <dx-button
+        class="button-info btn btn-default btn-green"
+        text="View"
+        [routerLink]="['../projects']">
+      </dx-button> 
+    </div>
+  </div>
+</div>
+
+
+
+<div class="row">
+  <div class="col-sm-12">
+      <div class="main-heading clearfix">
+          <h3 class="page-heading"> Payroll </h3>
+          <dx-button class="button-info btn btn-default btn-green" text="Export to Excel">
+          </dx-button>
+      </div>
+  </div>
+
+  <div class="col-sm-12">
+      <div>
+          <dx-data-grid id="gridContainer" [dataSource]="dataSource" [allowColumnReordering]="true" [allowColumnResizing]="true" [columnAutoWidth]="true">
+
+              <dxo-header-filter [visible]="true"></dxo-header-filter>
+              <dxo-filter-row [visible]="true"></dxo-filter-row>
+              <dxo-selection mode="multiple"></dxo-selection>
+              <dxo-editing mode="popup" [allowUpdating]="false"></dxo-editing>
+              
+              <dxi-column dataField="EmpCode" caption="Emp. Code"></dxi-column>
+              <dxi-column dataField="EmpName" caption="Emp. Name"></dxi-column>
+              <dxi-column dataField="Office" caption="Office"></dxi-column>
+              <dxi-column dataField="Currency" caption="Currency"></dxi-column>
+              <dxi-column dataField="Designation" caption="Designation"></dxi-column>
+              <dxi-column dataField="Type" caption="Type"></dxi-column>
+              <dxi-column dataField="BasicPay" caption="Basic Pay"></dxi-column>
+              <dxi-column dataField="Atd" caption="Atd"></dxi-column>
+              <dxi-column dataField="Abs" caption="Abs"></dxi-column>
+              <dxi-column dataField="Salary" caption="Salary"></dxi-column>
+              <dxi-column dataField="Food" caption="Food"></dxi-column>
+              <dxi-column dataField="Medical" caption="Medical"></dxi-column>
+              <dxi-column dataField="TAllowance" caption="T Allowance"></dxi-column>
+              <dxi-column dataField="Other" caption="Other"></dxi-column>
+              <dxi-column dataField="Other1" caption="Other 1"></dxi-column>
+              <dxi-column dataField="Other1Desc" caption="Other 1 Desc"></dxi-column>
+              <dxi-column dataField="Other2" caption="Other2"></dxi-column>
+              <dxi-column dataField="Other2Desc" caption="Other 2 Desc"></dxi-column>
+              <dxi-column dataField="Gross" caption="Gross"></dxi-column>
+              <dxi-column dataField="SalaryTax" caption="Salary Tax"></dxi-column>
+              <dxi-column dataField="CBDed" caption="CBDed"></dxi-column>
+              <dxi-column dataField="Fines" caption="Fines"></dxi-column>
+              <dxi-column dataField="Security" caption="Security"></dxi-column>
+              <dxi-column dataField="Pension" caption="Pension"></dxi-column>
+              <dxi-column dataField="Others" caption="Others"></dxi-column>
+              <dxi-column dataField="NetSalary" caption="Net Salary Filter"></dxi-column>
+              <dxi-column dataField="BudgetBalance" caption="Budget Balance"></dxi-column>
+              <dxi-column dataField="Details" caption="Details"></dxi-column>
+              <dxi-column dataField="SalarySlip" caption="Salary Slip"></dxi-column>
+             
+              <dxo-paging [pageSize]="10"></dxo-paging>
+              <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
+          </dx-data-grid>
+      </div>
+  </div>
+</div>

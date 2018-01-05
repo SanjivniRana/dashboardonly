@@ -1,0 +1,898 @@
+<div class="heading-hdr">
+    <div class="main-heading clearfix">
+        <h3 class="page-heading">Employees</h3>
+    </div>
+</div>
+
+<div class="employee-details-outer">
+    <div class="row">
+        <div class="col-xs-12 col-sm-4 col-md-3 emp-left-part-outer">
+            <div class="emp-left-part">
+                <ul class="nav nav-tabs tabs-left">
+                    <li class="active">
+                        <a href="#employee-tab-2" data-toggle="tab" (click)="tabOnClick(1)">PROSPECTIVE</a>
+                    </li>
+                    <li>
+                        <a href="#employee-tab-1" data-toggle="tab" (click)="tabOnClick(2)">ACTIVE</a>
+                    </li>
+                    <li>
+                        <a href="#employee-tab-3" data-toggle="tab" (click)="tabOnClick(3)">TERMINATED</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane" id="employee-tab-1">
+                        <div class="emp-list-hdr">
+                            <div class="emp-add-btn" (click)="openAddForm($event)">
+                                <a>
+                                    <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="emp-listing">
+                            <div class="emp-search-bx">
+                                <form>
+                                    <div class="em-search-bx-in">
+                                        <input class="form-control" type="search" placeholder="Search Employee" />
+                                    </div>
+                                </form>
+                            </div>
+                            <ul>
+                                <li *ngFor="let item of activeEmployeeInfo">
+                                    <a href="javascript:void(0);" (click)="displayActiveEmpDetails(item)">
+                                        <div class="emp-list-img">
+                                            <!-- <img src="data:image/png;base64,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" alt="" /> -->
+                                            <img src="{{item.EmployeePhoto}}" />
+                                        </div>
+                                        <div class="emp-list-txt">
+                                            <h4>{{item.EmployeeName}}</h4>
+                                            <p>Sex: {{item.sexName}}</p>
+                                            <p>Age: {{item.Age}}</p>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="tab-pane active" id="employee-tab-2">
+                        <div class="emp-list-hdr">
+                            <div class="emp-add-btn" (click)="openAddForm($event)">
+                                <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="emp-listing">
+                            <div class="emp-search-bx">
+                                <form>
+                                    <div class="em-search-bx-in">
+                                        <input class="form-control" type="search" placeholder="Search Employee" />
+                                    </div>
+                                </form>
+                            </div>
+                            <ul>
+                                <li *ngFor="let item of prospectiveEmployeeInfo">
+                                    <a href="javascript:void(0);" (click)="displayProspectiveEmpDetails(item)">
+                                        <div class="emp-list-img">
+                                            <!-- <img src="assets/images/profile-pic.jpg" alt="" /> -->
+                                            <img src="{{item.EmployeePhoto}}" alt="" />
+                                        </div>
+                                        <div class="emp-list-txt">
+                                            <h4>{{item.EmployeeName}}</h4>
+                                            <p>Sex: {{item.sexName}}</p>
+                                            <p>Age: {{item.Age}}</p>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="employee-tab-3">
+                        <div class="emp-list-hdr">
+                            <div class="emp-add-btn" (click)="openAddForm($event)">
+                                <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="emp-listing">
+                            <div class="emp-search-bx">
+                                <form>
+                                    <div class="em-search-bx-in">
+                                        <input class="form-control" type="search" placeholder="Search Employee" />
+                                    </div>
+                                </form>
+                            </div>
+                            <ul>
+                                <li *ngFor="let item of terminatedEmployeeInfo">
+                                    <a href="javascript:void(0);" (click)="displayTerminatedEmpDetails(item)">
+                                        <div class="emp-list-img">
+                                            <img src="../../../../assets/images/profile-pic.jpg" alt="" />
+                                        </div>
+                                        <div class="emp-list-txt">
+                                            <h4>{{item.EmployeeName}}</h4>
+                                            <p>Sex: {{item.sexName}}</p>
+                                            <p>Age: {{item.Age}}</p>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-8 col-md-9 emp-right-part-outer">
+            <div *ngIf="showData">
+                <div class="emp-right-part">
+                    <!-- <div class="emp-right-part-hdr">
+                        <div class="emp-dp-sec">
+                            <figure>
+                                <img src="http://www.argroup.co.uk/wp-content/uploads/2016/01/Taylor-Jack-2017-Crop-384x384.jpg" alt="" />
+                            </figure>
+                            <h4>Employee Name: {{showData.EmployeeName}}</h4>
+                        </div>
+                    </div> -->
+
+                    <div id="tab" *ngIf="openaddform==0">
+                        <div class="emp-right-part-hdr">
+                            <div class="emp-dp-sec">
+                                <figure>
+                                    <img src="{{this.imageURL}}" height="100px" width="100px" alt="Profile Image" />
+                                </figure>
+                                <dx-file-uploader accept="image/*" uploadMode="useForm" (onValueChanged)="onImageSelect($event)" [multiple]="false"></dx-file-uploader>
+                            </div>
+                        </div>
+                        <form action="your-action" (submit)="AddEmployeeDetails(empGeneral)">
+                            <dx-form id="form" [formData]="empGeneral" [colCount]="2" [readOnly]="false" [showColonAfterLabel]="true" [showValidationSummary]="true"
+                                validationGroup="generalDetails">
+
+                                <dxi-item dataField="EmployeeName">
+                                    <dxi-validation-rule type="required" message="Employee Name is required">
+                                    </dxi-validation-rule>
+                                    <dxi-validation-rule type="pattern" [pattern]="namePattern" message="Do not use digits in the Name"></dxi-validation-rule>
+                                    <dxi-validation-rule type="stringLength" [min]="2" message="Name must have at least 2 symbols"></dxi-validation-rule>
+                                </dxi-item>
+
+                                <dxi-item dataField="FatherName">
+                                    <dxi-validation-rule type="required" message="Father Name is required">
+                                    </dxi-validation-rule>
+                                    <dxi-validation-rule type="pattern" [pattern]="namePattern" message="Do not use digits in the Name"></dxi-validation-rule>
+                                </dxi-item>
+
+                                <dxi-item dataField="SexId" editorType="dxSelectBox" [editorOptions]="{ dataSource: sexTypes, displayExpr: 'SexName', valueExpr: 'SexId'  }">
+                                    <dxo-label text="Sex"></dxo-label>
+                                    <dxi-validation-rule type="required" message="Sex is required">
+                                    </dxi-validation-rule>
+                                </dxi-item>
+
+                                <dxi-item dataField="DateOfBirth" editorType="dxDateBox">
+                                    <dxi-validation-rule type="required" message="Date Of Birth is required">
+                                    </dxi-validation-rule>
+                                    <dxi-validation-rule type="range" [max]="maxDate" message="You must be at least 18 years old"></dxi-validation-rule>
+                                </dxi-item>
+
+
+                                <dxi-item dataField="Age" editorType="dxNumberBox">
+                                    <dxi-validation-rule type="required" message="Age is required">
+                                    </dxi-validation-rule>
+                                </dxi-item>
+
+                                <dxi-item dataField="Email">
+                                    <dxi-validation-rule type="required" message="Email is required">
+                                    </dxi-validation-rule>
+                                    <dxi-validation-rule type="email"></dxi-validation-rule>
+                                </dxi-item>
+
+                                <dxi-item dataField="CountryId">
+                                    <dxo-label text="Country"></dxo-label>
+                                    <dx-select-box (onValueChanged)="getStateType($event.value)" [(dataSource)]="countryTypeDropdown" valueExpr="CountryId" value="CountryId"
+                                        displayExpr="CountryName">
+                                    </dx-select-box>
+                                    <dxi-validation-rule type="required" message="Country is required">
+                                    </dxi-validation-rule>
+                                </dxi-item>
+
+                                <dxi-item dataField="ProvinceId" editorType="dxSelectBox" [editorOptions]="{ dataSource: stateTypeDropdown, displayExpr: 'ProvinceName', valueExpr: 'ProvinceId'  }">
+                                    <dxo-label text="State"></dxo-label>
+                                    <dxi-validation-rule type="required" message="ProvinceId is required">
+                                    </dxi-validation-rule>
+                                </dxi-item>
+
+                                <dxi-item dataField="Phone" [editorOptions]="{ mask: '(000) 000-0000'}">
+                                </dxi-item>
+
+                                <dxi-item dataField="City">
+                                </dxi-item>
+
+                                <dxi-item dataField="PermanentAddress">
+                                </dxi-item>
+
+                                <dxi-item dataField="CurrentAddress">
+                                </dxi-item>
+
+                                <dxi-item dataField="HigherQualificationId" editorType="dxSelectBox" [editorOptions]="{ dataSource: qualificationTypeDropdown, displayExpr: 'QualificationName', valueExpr: 'QualificationId'  }">
+                                    <dxo-label text="Qualification"></dxo-label>
+                                </dxi-item>
+
+                                <dxi-item dataField="ProfessionId" editorType="dxSelectBox" [editorOptions]="{ dataSource: professionTypeDropdown, displayExpr: 'ProfessionName', valueExpr: 'ProfessionId' }">
+                                    <dxo-label text="Profession"></dxo-label>
+                                </dxi-item>
+
+                                <dxi-item dataField="ExperienceYear" editorType="dxNumberBox">
+                                </dxi-item>
+
+                                <dxi-item dataField="ExperienceMonth" editorType="dxNumberBox">
+                                </dxi-item>
+
+                                <dxi-item dataField="PreviousWork">
+                                </dxi-item>
+
+                                <dxi-item dataField="ReferBy"></dxi-item>
+
+                                <dxi-item dataField="Resume" caption="Upload CV" class="add-from-upload-btn">
+                                    <dxo-label text="Upload CV"></dxo-label>
+                                    <dx-file-uploader selectButtonText="Select file" labelText="" accept="*" uploadMode="useForm" (onValueChanged)="onFileSelect($event)"
+                                        [multiple]="false">
+                                    </dx-file-uploader>
+                                </dxi-item>
+                            </dx-form>
+
+                            <div class="btn-grp-wrap">
+                                <dx-button text="Save" type="success" validationGroup="generalDetails" [useSubmitBehavior]="true"></dx-button>
+                                <dx-button text="Cancel" type="success" validationGroup="generalDetails" [useSubmitBehavior]="true" (click)="closeForm($event)"></dx-button>
+                            </div>
+                            <br>
+                        </form>
+
+                    </div>
+
+                    <div id="tabs" *ngIf="openaddform==1">
+
+                        <div class="emp-right-part-hdr">
+                            <div class="emp-dp-sec">
+                                <figure>
+                                    <img src="{{showData.EmployeePhoto}}" alt="" />
+                                </figure>
+                                <h4>{{showData.EmployeeName}}</h4>
+                            </div>
+                        </div>
+
+                        <dx-tabs #apiTabs [selectedIndex]="0" [dataSource]="showInfoTabs" (onItemClick)="openInfoTabs($event)"></dx-tabs>
+
+
+                        <div *ngIf="openInfoTab==0">
+                            <div class="btn-grp-wrap" *ngIf="displayEmpInfoTab==0">
+                                <dx-button text="Edit" type="success" (click)="showEditForm($event)"></dx-button>
+                            </div>
+                            <div *ngIf="displayEmpInfoTab==0">
+                                <!-- <div *ngIf="showData"> -->
+                                <div class="porject-des-listing">
+                                    <ul>
+                                        <li>
+                                            <h4>Employee Name:</h4>
+                                            <span>{{showData.EmployeeName}}</span>
+                                        </li>
+                                        <li>
+                                            <h4>Age:</h4>
+                                            <span> {{showData.Age}}</span>
+                                        </li>
+                                        <li>
+                                            <h4>Sex:</h4>
+                                            <span> {{showData.SexName}}</span>
+                                        </li>
+                                        <li>
+                                            <h4>Date Of Birth:</h4>
+                                            <span> {{showData.DateOfBirth}}</span>
+                                        </li>
+                                        <li>
+                                            <h4>Father's Name:</h4>
+                                            <span> {{showData.FatherName}}</span>
+                                        </li>
+                                        <li>
+                                            <h4>Email:</h4>
+                                            <span> {{showData.Email}}</span>
+                                        </li>
+                                        <li>
+                                            <h4>Phone:</h4>
+                                            <span> {{showData.Phone}}</span>
+                                        </li>
+                                        <li>
+                                            <h4>Country:</h4>
+                                            <span> {{showData.CountryName}}</span>
+                                        </li>
+                                        <li>
+                                            <h4>State:</h4>
+                                            <span> {{showData.ProvinceName}}</span>
+                                        </li>
+                                        <li>
+                                            <h4>City:</h4>
+                                            <span> {{showData.City}}</span>
+                                        </li>
+                                        <li>
+                                            <h4>Permanent Address:</h4>
+                                            <span> {{showData.PermanentAddress}}</span>
+                                        </li>
+                                        <li>
+                                            <h4>Current Address:</h4>
+                                            <span> {{showData.CurrentAddress}}</span>
+                                        </li>
+                                        <li>
+                                            <h4>Qualification:</h4>
+                                            <span> {{showData.HigherQualificationName}}</span>
+                                        </li>
+                                        <li>
+                                            <h4>Profession:</h4>
+                                            <span> {{showData.ProfessionName}}</span>
+                                        </li>
+                                        <li>
+                                            <h4>Experience Year:</h4>
+                                            <span> {{showData.ExperienceYear}}</span>
+                                        </li>
+                                        <li>
+                                            <h4>Experience Month:</h4>
+                                            <span> {{showData.ExperienceMonth}}</span>
+                                        </li>
+                                        <li>
+                                            <h4>Previous Work:</h4>
+                                            <span> {{showData.PreviousWork}}</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div id="editTab" *ngIf="displayEmpInfoTab==1">
+                                <br>
+                                <form action="your-action" (submit)="EditEmployeeDetails(showData)">
+                                    <dx-form id="form" [formData]="showData" [colCount]="2" [readOnly]="false" [showColonAfterLabel]="true" [showValidationSummary]="true"
+                                        validationGroup="generalDetails">
+
+                                        <dxi-item dataField="EmployeeName">
+                                            <dxi-validation-rule type="required" message="Employee Name is required">
+                                            </dxi-validation-rule>
+                                            <dxi-validation-rule type="pattern" [pattern]="namePattern" message="Do not use digits in the Name"></dxi-validation-rule>
+                                            <dxi-validation-rule type="stringLength" [min]="2" message="Name must have at least 2 symbols"></dxi-validation-rule>
+                                        </dxi-item>
+
+                                        <dxi-item dataField="FatherName">
+                                            <dxi-validation-rule type="required" message="Father Name is required">
+                                            </dxi-validation-rule>
+                                            <dxi-validation-rule type="pattern" [pattern]="namePattern" message="Do not use digits in the Name"></dxi-validation-rule>
+                                        </dxi-item>
+
+                                        <dxi-item dataField="SexId" editorType="dxSelectBox" [editorOptions]="{ dataSource: sexTypes, displayExpr: 'SexName', valueExpr: 'SexId'  }">
+                                            <dxo-label text="Sex"></dxo-label>
+                                            <dxi-validation-rule type="required" message="Sex is required">
+                                            </dxi-validation-rule>
+                                        </dxi-item>
+
+                                        <dxi-item dataField="DateOfBirth" editorType="dxDateBox" [editorOptions]="{ disabled: true }">
+                                            <dxi-validation-rule type="required" message="Date Of Birth is required">
+                                            </dxi-validation-rule>
+                                            <dxi-validation-rule type="range" [max]="maxDate" message="You must be at least 18 years old"></dxi-validation-rule>
+                                        </dxi-item>
+
+                                        <dxi-item dataField="Age" editorType="dxNumberBox">
+                                            <dxi-validation-rule type="required" message="Age is required">
+                                            </dxi-validation-rule>
+                                        </dxi-item>
+
+                                        <dxi-item dataField="Email">
+                                            <dxi-validation-rule type="required" message="Email is required">
+                                            </dxi-validation-rule>
+                                            <dxi-validation-rule type="email"></dxi-validation-rule>
+                                        </dxi-item>
+
+                                        <dxi-item dataField="CountryId">
+                                            <dxo-label text="Country"></dxo-label>
+                                            <dx-select-box (onValueChanged)="getStateType($event.value)" [(dataSource)]="countryTypeDropdown" valueExpr="CountryId" [(value)]="CountryId"
+                                                displayExpr="CountryName">
+                                            </dx-select-box>
+                                            <dxi-validation-rule type="required" message="Country is required">
+                                            </dxi-validation-rule>
+                                        </dxi-item>
+
+                                        <dxi-item dataField="ProvinceId" editorType="dxSelectBox" [editorOptions]="{ dataSource: stateTypeDropdown, displayExpr: 'ProvinceName', valueExpr: 'ProvinceId' }">
+                                            <dxo-label text="State"></dxo-label>
+                                            <dxi-validation-rule type="required" message="ProvinceId is required">
+                                            </dxi-validation-rule>
+                                        </dxi-item>
+
+                                        <dxi-item dataField="Phone" [editorOptions]="{ mask: '(000) 000-0000'}">
+                                        </dxi-item>
+
+                                        <dxi-item dataField="City">
+                                        </dxi-item>
+
+                                        <dxi-item dataField="PermanentAddress">
+                                        </dxi-item>
+
+                                        <dxi-item dataField="CurrentAddress">
+                                        </dxi-item>
+
+                                        <dxi-item dataField="HigherQualificationId" editorType="dxSelectBox" [editorOptions]="{ dataSource: qualificationTypeDropdown, displayExpr: 'QualificationName', valueExpr: 'QualificationId'  }">
+                                            <dxo-label text="Qualification"></dxo-label>
+                                        </dxi-item>
+
+                                        <dxi-item dataField="ProfessionId" editorType="dxSelectBox" [editorOptions]="{ dataSource: professionTypeDropdown, displayExpr: 'ProfessionName', valueExpr: 'ProfessionId'  }">
+                                            <dxo-label text="Profession"></dxo-label>
+                                        </dxi-item>
+
+                                        <dxi-item dataField="ExperienceYear" editorType="dxNumberBox">
+                                        </dxi-item>
+
+                                        <dxi-item dataField="ExperienceMonth" editorType="dxNumberBox">
+                                        </dxi-item>
+
+                                        <dxi-item dataField="PreviousWork">
+                                        </dxi-item>
+
+                                        <dxi-item dataField="ReferBy">
+                                        </dxi-item>
+
+                                        <!-- <dxi-item dataField="EmployeePhoto" caption="Employee Photo" class="add-from-upload-btn">
+                                            <dxo-label text="Employee Photo"></dxo-label>
+                                            <dx-file-uploader selectButtonText="Select photo" labelText="" accept="image/*" uploadMode="useForm" (onValueChanged)="onImageSelect($event)"
+                                                [multiple]="false">
+                                            </dx-file-uploader>
+                                        </dxi-item> -->
+
+                                        <dxi-item dataField="Resume" caption="Upload CV" class="add-from-upload-btn">
+                                            <dxo-label text="Upload CV"></dxo-label>
+                                            <dx-file-uploader selectButtonText="Select file" labelText="" accept="*" uploadMode="useForm" (onValueChanged)="onFileSelect($event)"
+                                                [multiple]="false">
+                                            </dx-file-uploader>
+
+                                        </dxi-item>
+                                    </dx-form>
+                                    <div class="btn-grp-wrap">
+                                        <dx-button text="Save" type="success" validationGroup="generalDetails" [useSubmitBehavior]="true"></dx-button>
+                                        <dx-button text="Cancel" type="success" validationGroup="generalDetails" [useSubmitBehavior]="true" (click)="closeForm($event)"></dx-button>
+                                    </div>
+                                    <br>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div *ngIf="openInfoTab==1">
+
+                            <div *ngIf="displayProfInfoTab==0">
+
+                                <div *ngIf="professionalDetails">
+                                    <div class="btn-grp-wrap">
+                                        <dx-button text="Edit" type="success" (click)="showProfEditForm(professionalDetails)"></dx-button>
+                                    </div>
+                                    <div class="porject-des-listing">
+                                        <ul>
+                                            <li>
+                                                <h4>Employee Type:</h4>
+                                                <span>{{professionalDetails.EmployeeTypeName}}</span>
+                                            </li>
+                                            <li>
+                                                <h4>Status:</h4>
+                                                <span>{{professionalDetails.Status}}</span>
+                                            </li>
+
+                                            <li>
+                                                <h4>Office:</h4>
+                                                <span>{{professionalDetails.OfficeName}}</span>
+                                            </li>
+
+                                            <li>
+                                                <h4>Designation:</h4>
+                                                <span>{{professionalDetails.DesignationName}}</span>
+                                            </li>
+
+
+                                            <li>
+                                                <h4>Department:</h4>
+                                                <span>{{professionalDetails.DepartmentName}}</span>
+                                            </li>
+
+                                            <li>
+                                                <h4>Hired On:</h4>
+                                                <span>{{professionalDetails.HiredOn}}</span>
+                                            </li>
+                                        </ul>
+
+                                        <hr>
+
+                                        <ul>
+                                            <li>
+                                                <h4>Fired On:</h4>
+                                                <span>{{professionalDetails.FiredOn}}</span>
+                                            </li>
+                                            <li>
+                                                <h4>Fired Reason:</h4>
+                                                <span>{{professionalDetails.FiredReason}}</span>
+                                            </li>
+                                        </ul>
+
+                                        <br>
+
+                                        <ul>
+                                            <li>
+                                                <h4>Resignation On:</h4>
+                                                <span>{{professionalDetails.ResignationOn}}</span>
+                                            </li>
+                                            <li>
+                                                <h4>Resignation Reason:</h4>
+                                                <span>{{professionalDetails.ResignationReason}}</span>
+                                            </li>
+                                        </ul>
+
+                                        <br>
+
+                                        <ul>
+                                            <li>
+                                                <h4>Job Description:</h4>
+                                                <span>{{professionalDetails.JobDescription}}</span>
+                                            </li>
+                                            <li>
+                                                <h4>Training/Benefits:</h4>
+                                                <span>{{professionalDetails.TrainingBenefits}}</span>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <!-- <div *ngIf="!professionalDetails">
+                                    <br>
+                                    <br>
+                                    <dx-button text="Add New" (onClick)="showProfEditForm()"></dx-button>
+                                </div> -->
+
+                            </div>
+
+                        <div id="editTab" *ngIf="displayProfInfoTab==1">
+                                <br>
+                                <form action="your-action" (submit)="EditProfessionalDetails(professionalDetails)">
+                                    <dx-form id="form" [formData]="professionalDetails" [colCount]="2" [readOnly]="false" [showColonAfterLabel]="true" [showValidationSummary]="true"
+                                        validationGroup="professionalDetails">
+
+                                        <dxi-item dataField="EmployeeTypeId" editorType="dxSelectBox" [editorOptions]="{ dataSource: employeeTypeDropdown, displayExpr: 'EmployeeTypeName', valueExpr: 'EmployeeTypeId'  }">
+                                            <dxo-label text="Employee Type"></dxo-label>
+                                        </dxi-item>
+
+                                        <dxi-item dataField="Status">
+                                        </dxi-item>
+
+                                        <dxi-item dataField="OfficeId">
+                                            <dxo-label text="Office"></dxo-label>
+                                            <dx-select-box (onValueChanged)="getDepartmentType($event.value)" [dataSource]="officeTypeDropdown" valueExpr="OfficeId"
+                                                displayExpr="OfficeName" [(value)]="OfficeId">
+                                            </dx-select-box>
+                                        </dxi-item>
+
+                                        <dxi-item dataField="DepartmentId" editorType="dxSelectBox" [editorOptions]="{ dataSource: departmentTypeDropdown, displayExpr: 'DepartmentName', valueExpr: 'DepartmentId'  }">
+                                            <dxo-label text="Department"></dxo-label>
+                                        </dxi-item>
+
+                                        <dxi-item dataField="DesignationId" editorType="dxSelectBox" [editorOptions]="{ dataSource: designationDropdown, displayExpr: 'Designation', valueExpr: 'DesignationId'  }">
+                                            <dxo-label text="Designation"></dxo-label>
+                                        </dxi-item>
+
+
+                                        <dxi-item dataField="HiredOn" editorType="dxDateBox" [editorOptions]="{ disabled: false }">
+                                        </dxi-item>
+
+
+                                        <dxi-item dataField="FiredOn" editorType="dxDateBox" [editorOptions]="{ disabled: false }">
+                                        </dxi-item>
+
+                                        <dxi-item dataField="FiredReason">
+                                        </dxi-item>
+
+                                        <dxi-item dataField="ResignationOn" editorType="dxDateBox" [editorOptions]="{ disabled: false }">
+                                        </dxi-item>
+
+                                        <dxi-item dataField="ResignationReason">
+                                        </dxi-item>
+
+                                        <dxi-item dataField="JobDescription">
+                                        </dxi-item>
+
+                                        <dxi-item dataField="TrainingBenefits">
+                                            <dxo-label text="Training / Benefits"></dxo-label>
+                                        </dxi-item>
+
+                                    </dx-form>
+                                    <div class="btn-grp-wrap">
+                                        <dx-button text="Save" type="success" validationGroup="professionalDetails" [useSubmitBehavior]="true"></dx-button>
+                                        <dx-button text="Cancel" type="success" validationGroup="professionalDetails" [useSubmitBehavior]="true" (click)="closeProfForm()"></dx-button>
+                                    </div>
+                                    <br>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div *ngIf="openInfoTab==2">
+                            <br>
+                            <dx-button text="Add New" (onClick)="ShowAddDocPopup()"></dx-button>
+                            <dx-data-grid id="gridContainer" [dataSource]="showDocumentData" [allowColumnReordering]="true" [allowColumnResizing]="true" [columnAutoWidth]="true" 
+                                (onRowUpdating)="logEvents('RowUpdating',$event)">                
+                                    
+                                <dxo-paging [pageSize]="10"></dxo-paging>
+                                <dxo-editing [allowAdding]="false" [allowUpdating]="true" [allowDeleting]="false"></dxo-editing>
+                                <dxo-pager [allowedPageSizes]="[5, 8, 15, 30]" [showInfo]="true" [showNavigationButtons]="true" [showPageSizeSelector]="true" [visible]="true">
+                                </dxo-pager>
+                                <dxo-scrolling mode="infinite"></dxo-scrolling>
+                                <dxo-filter-row [visible]="true"></dxo-filter-row>
+                                <dxo-header-filter [visible]="true"></dxo-header-filter>
+                                <dxo-search-panel [visible]="true" [width]="240" placeholder="Search..."></dxo-search-panel>
+                
+                                <dxi-column dataField="DocumentName" caption="Document Name">  
+                                    <dxi-validation-rule type="required"></dxi-validation-rule>        
+                                </dxi-column>      
+                                <dxi-column dataField="DocumentDate" caption="Document Date" dataType="date">
+                                    <dxi-validation-rule type="required"></dxi-validation-rule>
+                                </dxi-column> 
+                                <dxi-column dataField="DocumentFilePath" caption="Document File" cellTemplate="CellTemplateDocumentFile"></dxi-column>          
+                                <div *dxTemplate="let data of 'CellTemplateDocumentFile'">
+                                    <a [href]="docpath" target="_blank" [download]="docpath">Document
+                                        <!-- <i class="fa fa-download"></i> -->
+                                    </a>
+                                </div>
+                            </dx-data-grid> 
+                        </div>
+
+                        <div *ngIf="openInfoTab==3">
+                            <br>
+                            <dx-button text="Add New" (onClick)="ShowAddEmpHistoryPopup()"></dx-button>
+                            <dx-data-grid id="gridContainer" [dataSource]="showEmployeeHistoryData" [allowColumnReordering]="true" [allowColumnResizing]="true" [columnAutoWidth]="true" 
+                                (onRowUpdating)="logEvent('RowUpdating',$event)">                
+                                    
+                                <dxo-paging [pageSize]="10"></dxo-paging>
+                                <dxo-editing [allowAdding]="false" [allowUpdating]="true" [allowDeleting]="false"></dxo-editing>
+                               
+                                <dxo-pager [allowedPageSizes]="[5, 8, 15, 30]" [showInfo]="true" [showNavigationButtons]="true" [showPageSizeSelector]="true" [visible]="true">
+                                </dxo-pager>
+                                <dxo-scrolling mode="infinite"></dxo-scrolling>
+                                <dxo-filter-row [visible]="true"></dxo-filter-row>
+                                <dxo-header-filter [visible]="true"></dxo-header-filter>
+                                <dxo-search-panel [visible]="true" [width]="240" placeholder="Search..."></dxo-search-panel>
+                        
+                                <dxi-column dataField="HistoryDate" caption="History Date" dataType="date">
+                                    <dxi-validation-rule type="required"></dxi-validation-rule>
+                                </dxi-column> 
+                                <dxi-column dataField="Description">  
+                                    <dxi-validation-rule type="required"></dxi-validation-rule>        
+                                </dxi-column> 
+                            </dx-data-grid> 
+                        </div>
+
+                        <div *ngIf="openInfoTab==4" class="container">
+
+                            <br>
+                            <dx-button text="Assign Leave" (onClick)="showAssignUnitPopup()"></dx-button>
+                            <br>
+                            <br>
+
+                            <dx-data-grid id="gridContainer" [dataSource]="leaveInfoDataSource" [allowColumnReordering]="true" [allowColumnResizing]="true">
+                                <dxo-editing [allowAdding]="false" [allowUpdating]="false" mode="batch"></dxo-editing>
+                                <dxo-grouping [contextMenuEnabled]="true" expandMode="rowClick"></dxo-grouping>
+                                <dxo-group-panel [visible]="false" emptyPanelText="Use the context menu of header columns to group data"></dxo-group-panel>
+                                <dxo-header-filter [visible]="true">
+                                </dxo-header-filter>
+                                <dxo-selection mode="multiple">
+                                </dxo-selection>
+                                <dxo-filter-row [visible]="showFilterRow">
+                                </dxo-filter-row>
+                                <dxi-column dataField="LeaveReasonName" caption="Leave Reason">
+                                    <dxi-validation-rule type="required"></dxi-validation-rule>
+                                </dxi-column>
+                                <dxi-column dataField="Unit" caption="Days" dataType="number">
+                                    <dxi-validation-rule type="required"></dxi-validation-rule>
+                                </dxi-column>
+                                <dxi-column dataField="AssignUnit" caption="Assigned Days" dataType="number">
+                                    <dxi-validation-rule type="required"></dxi-validation-rule>
+                                </dxi-column>
+                                <dxi-column dataField="BlanceLeave" caption="Balance Leave" dataType="number">
+                                    <dxi-validation-rule type="required"></dxi-validation-rule>
+                                </dxi-column>
+                                <dxo-paging [pageSize]="10"></dxo-paging>
+                                <!-- <dxi-column caption="Action" alignment="center" [width]="100" cellTemplate="CellTemplateEdit"></dxi-column>
+                                <div *dxTemplate="let data of 'CellTemplateEdit'">
+                                    <a href="javascript:void()" (click)="GetLeaveReasonDetailById(data)">Edit</a>
+                                </div> -->
+                            </dx-data-grid>
+
+                        </div>
+
+                        <div *ngIf="openInfoTab==5">
+                            <br>
+                            <dx-data-grid id="gridContainer" [dataSource]="emailsettingdt" [allowColumnReordering]="true" [allowColumnResizing]="true" [columnAutoWidth]="true" >                
+                                    
+                                <dxo-paging [pageSize]="10"></dxo-paging>
+                                <dxo-editing [allowAdding]="true" [allowUpdating]="true"></dxo-editing>
+                                <dxo-pager [allowedPageSizes]="[5, 8, 15, 30]" [showInfo]="true" [showNavigationButtons]="true" [showPageSizeSelector]="true" [visible]="true">
+                                </dxo-pager>
+                                <dxo-scrolling mode="infinite"></dxo-scrolling>
+                                <dxo-filter-row [visible]="true"></dxo-filter-row>
+                                <dxo-header-filter [visible]="true"></dxo-header-filter>
+                                <dxo-search-panel [visible]="true" [width]="240" placeholder="Search..."></dxo-search-panel>
+                      
+                                <dxi-column dataField="BloodGroup">
+                                    <dxi-validation-rule type="required"></dxi-validation-rule>
+                                </dxi-column> 
+                                <dxi-column dataField="Allergies">  
+                                    <dxi-validation-rule type="required"></dxi-validation-rule>        
+                                </dxi-column>  
+                                <dxi-column dataField="PastSurgery" caption="Past Surgery">  
+                                    <dxi-validation-rule type="required"></dxi-validation-rule>        
+                                </dxi-column>
+                                <dxi-column dataField="ChronicDisease" caption="Chronic Disease">  
+                                    <dxi-validation-rule type="required"></dxi-validation-rule>        
+                                </dxi-column>
+                                <dxi-column dataField="CurrentMedication" caption="Current Medication">  
+                                    <dxi-validation-rule type="required"></dxi-validation-rule>        
+                                </dxi-column>
+                            </dx-data-grid> 
+                        </div>
+                        <br>
+
+
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Loader Before User Listings -->
+            <div>
+                <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<!-- ADD DOC POPUP-->
+<dx-popup class="popup" [width]="600" [height]="800" [showTitle]="true" title="Add Document Details" [dragEnabled]="false" [closeOnOutsideClick]="true"
+[(visible)]="popupAddDocumentVisible">
+
+    <div *dxTemplate="let data of 'content'">
+        <form action="your-action" (submit)="addDocumentDetails(empDocuments)">
+        <dx-form id="form" [formData]="empDocuments" [colCount]="2" [readOnly]="false" [showColonAfterLabel]="true" [showValidationSummary]="true"
+            validationGroup="generalDetails">
+
+            <dxi-item dataField="DocumentName">
+                <dxi-validation-rule type="required" message="Document Name is required">
+                </dxi-validation-rule>    
+                <dxi-validation-rule type="stringLength" [min]="2" message="Name must have at least 2 symbols"></dxi-validation-rule>
+            </dxi-item>
+
+            <dxi-item dataField="DocumentDate" editorType="dxDateBox">
+                <dxi-validation-rule type="required" message="Document Date is required">
+                </dxi-validation-rule>
+            </dxi-item>
+
+            <dxi-item dataField="DocumentFilePath" class="add-from-upload-btn">
+                <dxo-label text="Document File"></dxo-label>
+                <dx-file-uploader selectButtonText="Select file" labelText="" accept="*" uploadMode="useForm" (onValueChanged)="onDocSelect($event)"
+                    [multiple]="false">
+                </dx-file-uploader>
+                <dxi-validation-rule type="required" message="Document is required">
+                </dxi-validation-rule>
+            </dxi-item>
+        </dx-form>
+        <div class="btn-grp-wrap">
+            <dx-button text="Save" type="success" validationGroup="generalDetails" [useSubmitBehavior]="true"></dx-button>
+            <dx-button text="Cancel" type="success" (click)="HideAddDocPopup()"></dx-button>
+        </div>
+    </form>
+    </div>
+
+</dx-popup>
+
+<!-- ADD EMP HISTORY POPUP-->
+<dx-popup class="popup" [width]="600" [height]="800" [showTitle]="true" title="Add Employee History Details" [dragEnabled]="false" [closeOnOutsideClick]="true"
+[(visible)]="popupEmpHistoryVisible">
+
+    <div *dxTemplate="let data of 'content'">
+        <form action="your-action" (submit)="addEmployeeHistoryDetail(empHistory)">
+            <dx-form id="form" [formData]="empHistory" [colCount]="2" [readOnly]="false" [showColonAfterLabel]="true" [showValidationSummary]="true"
+                validationGroup="generalDetails">
+
+                <dxi-item dataField="HistoryDate" editorType="dxDateBox">
+                    <dxi-validation-rule type="required" message="Document Date is required">
+                    </dxi-validation-rule>
+                </dxi-item>
+
+                <dxi-item dataField="Description">
+                    <dxi-validation-rule type="required" message="Document Name is required">
+                    </dxi-validation-rule>    
+                    <dxi-validation-rule type="stringLength" [min]="2" message="Name must have at least 2 symbols"></dxi-validation-rule>
+                </dxi-item>
+
+            </dx-form>
+            <div class="btn-grp-wrap">
+                <dx-button text="Save" type="success" validationGroup="generalDetails" [useSubmitBehavior]="true"></dx-button>
+                <dx-button text="Cancel" type="success" (click)="HideAddEmpHistoryPopup()"></dx-button>
+            </div>
+        </form>
+    </div>
+
+</dx-popup>
+
+<!-- EMP DOCUMENT POPUP  -->
+<dx-popup class="popup doc-popup-content" [width]="800" [height]="800" [showTitle]="false" title="Employee Documents" [dragEnabled]="false"
+[closeOnOutsideClick]="true" [(visible)]="popupVisibleDocument" [shading]="true" shadingColor="rgba(0, 0, 0, 0.5)">
+
+    <!-- <div *dxTemplate="let data of 'content'">
+        <app-document [docpath]="defaultDoc" [showDocumentData]="showDocumentData"></app-document>
+    </div> -->
+    <div class="row">
+        <!-- <div class="doc-iframe-outer">
+            <iframe [src]="docpath" style="text-align: center;" height="500px" width="400px"></iframe>
+        </div> -->
+        <div class="doc-popftr">
+            <div class="doc-popftr-inside">
+                <div class="doc-popup-dwnload-icon">
+                    <a [href]="docpath" target="_blank" [download]="docpath">
+                        <i class="fa fa-download"></i>
+                    </a>
+                </div>
+                <div class="doc-popup-select-drop">
+                    <dx-select-box (onValueChanged)="selectDoc($event)" [dataSource]="showDocumentData" valueExpr="DocumentGUID" displayExpr="DocumentName"
+                        value="DocumentGUID" [value]="selectedDropdown">
+                    </dx-select-box>
+                </div>
+                <div class="doc-popup-ad-btn">
+                    <a href="javascript:void(0);" (click)="ShowAddDocPopup()">
+                        <i aria-hidden="true" class="fa fa-plus-circle"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</dx-popup>
+
+<!-- Assign Leave -->
+<dx-popup class="popup" [width]="600" [height]="800" [showTitle]="true" title="Assign Leave" [dragEnabled]="false" [closeOnOutsideClick]="true"
+    [(visible)]="popupAssignLeaveVisible">
+
+    <div *dxTemplate="let data of 'content'">
+        <form action="your-action" (submit)="onFormSubmit(leaveInfoData)">
+            <dx-form id="form" [formData]="leaveInfoData" [colCount]="2" [readOnly]="false" [showColonAfterLabel]="true" [showValidationSummary]="true"
+                validationGroup="leaveInfoValidationDetails">
+
+                <dxi-item dataField="FinancialYearId" editorType="dxSelectBox" [editorOptions]="{ dataSource: financialYearDropdown, displayExpr: 'FinancialYearName', valueExpr: 'FinancialYearId'  }">
+                    <dxo-label text="Financial Year"></dxo-label>
+                    <dxi-validation-rule type="required" message="Financial Year  is required">
+                    </dxi-validation-rule>
+                </dxi-item>
+
+                <dxi-item dataField="LeaveReasonId">
+                    <dxo-label text="Reason Type"></dxo-label>
+                    <dx-select-box (onValueChanged)="getUnitType($event)" [dataSource]="leaveReasonTypeDropdown" valueExpr="LeaveReasonId" displayExpr="ReasonName">
+                    </dx-select-box>
+                    <dxi-validation-rule type="required" message="Leave Reason is required">
+                    </dxi-validation-rule>
+                </dxi-item>
+
+
+                <dxi-item dataField="Unit" editorType="dxNumberBox" [editorOptions]="{ disabled: true }">
+                    <dxo-label text="Units"></dxo-label>
+                    <dxi-validation-rule type="required" message="Unit is required">
+                    </dxi-validation-rule>
+                </dxi-item>
+
+                <dxi-item dataField="AssignUnit" editorType="dxNumberBox">
+                    <dxo-label text="Assign Units"></dxo-label>
+                    <dxi-validation-rule type="required" message="Assigned Units is required">
+                    </dxi-validation-rule>
+                </dxi-item>
+
+                <dxi-item dataField="Description">
+                    <dxo-label text="Remark"></dxo-label>
+                    <dxi-validation-rule type="required" message="Remarks is required">
+                    </dxi-validation-rule>
+                </dxi-item>
+
+            </dx-form>
+            <div class="btn-grp-wrap">
+                <dx-button text="Save" type="success" validationGroup="leaveInfoValidationDetails" [useSubmitBehavior]="true"></dx-button>
+                <dx-button text="Cancel" type="success" (click)="hideAssignUnitPopup()"></dx-button>
+            </div>
+        </form>
+    </div>
+
+</dx-popup>

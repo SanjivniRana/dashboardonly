@@ -1,0 +1,63 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div class="main-heading clearfix">
+      <h3 class="page-heading"> Prospective Employees </h3>
+      <!-- <dx-button class="button-info btn btn-default btn-green" text="Add New" [routerLink]="['../add-employees']">
+      </dx-button> -->
+    </div>
+  </div>
+
+  <div class="col-sm-12">
+    <div>
+      <dx-data-grid id="gridContainer" [dataSource]="prospectiveEmployee" [allowColumnReordering]="true" [allowColumnResizing]="true"
+        [columnAutoWidth]="true">
+
+        <dxo-grouping [contextMenuEnabled]="true" expandMode="rowClick"></dxo-grouping>
+        <dxo-group-panel [visible]="false" emptyPanelText="Use the context menu of header columns to group data"></dxo-group-panel>
+        <dxo-header-filter [visible]="true"></dxo-header-filter>
+        <dxo-filter-row [visible]="true"></dxo-filter-row>
+        <dxo-selection mode="multiple"></dxo-selection>
+        <dxo-editing mode="popup" [allowAdding]="true" [allowUpdating]="true">
+          <dxo-popup title="History" [showTitle]="true" [width]="700" [height]="345" [position]="{ my: 'center', at: 'center', of: 'window' }"></dxo-popup>
+        </dxo-editing>
+
+        <dxi-column dataField="EmployeeCode"></dxi-column>
+        <dxi-column dataField="EmployeeName"></dxi-column>
+        <dxi-column dataField="FatherName"></dxi-column>
+
+        <dxi-column dataField="Gender">
+          <dxo-lookup [dataSource]="genderType" valueExpr="ID" displayExpr="Name">
+          </dxo-lookup>
+        </dxi-column>
+
+
+        <dxi-column dataField="Nationality" [visible]="false"></dxi-column>
+        <dxi-column dataField="ReferredBy" [visible]="false"></dxi-column>
+        <dxi-column dataField="PassportNo" [visible]="false"></dxi-column>
+        <dxi-column dataField="IDCardNo" [visible]="false"></dxi-column>
+        <dxi-column dataField="Designation" [visible]="false"></dxi-column>
+        <dxi-column dataField="Qualification" [visible]="false"></dxi-column>
+        <dxi-column dataField="CVDate" [visible]="false"></dxi-column>
+        <dxi-column dataField="Profession" ></dxi-column>
+        <dxi-column dataField="Phone" [visible]="false"></dxi-column>
+        <dxi-column dataField="Fax" [visible]="false"></dxi-column>
+        <dxi-column dataField="Email" [visible]="false"></dxi-column>
+        <dxi-column dataField="PermanentAddress" [visible]="false"></dxi-column>
+        <dxi-column dataField="CurrentAddress" [visible]="false"></dxi-column>
+        <dxi-column dataField="Remarks" [visible]="false"></dxi-column>
+        <dxi-column dataField="BasicPay" [visible]="false"></dxi-column>
+
+        <dxi-column dataField="Currency" [visible]="false">
+          <dxo-lookup [dataSource]="currency" valueExpr="CurrencyId" displayExpr="CurrencyCode">
+          </dxo-lookup>
+        </dxi-column>
+
+        <dxi-column dataField="Office">
+          <dxo-lookup [dataSource]="officeCode" valueExpr="OfficeId" displayExpr="OfficeName">
+          </dxo-lookup>
+        </dxi-column>
+
+      </dx-data-grid>
+    </div>
+  </div>
+</div>

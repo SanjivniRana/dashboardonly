@@ -1,0 +1,126 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="main-heading clearfix">
+            <h3 class="page-heading">Vouchers</h3>
+        </div>
+        <dx-data-grid id="gridContainer" [dataSource]="voucherDetails" [allowColumnReordering]="true" [allowColumnResizing]="true"
+            [columnAutoWidth]="true" (onEditingStart)="logEvent('EditingStart',$event)" (onInitNewRow)="logEvent('InitNewRow',$event)"
+            (onRowInserting)="logEvent('RowInserting',$event)" (onRowInserted)="logEvent('RowInserted',$event)" (onRowUpdating)="logEvent('RowUpdating',$event)"
+            (onRowUpdated)="logEvent('RowUpdated',$event)" (onRowRemoving)="logEvent('RowRemoving',$event)" (onRowRemoved)="logEvent('RowRemoved',$event)"
+            (onRowClick)="onRowClickEvent($event.data)" [hoverStateEnabled]="true">
+            <dxo-paging [pageSize]="10"></dxo-paging>
+            <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5, 10, 20]" [showInfo]="true"></dxo-pager>
+            <dxo-editing mode="popup" [allowAdding]="true" [allowUpdating]="true" [form]="{
+                                    items: ['CurrencyId','OfficeId','VoucherDate','ChequeNo','JournalCode','VoucherTypeId','Description','ProjectId','BudgetLineId']
+                                }">
+                <dxo-popup title="Add/Edit Voucher" [showTitle]="true" [width]="700" [height]="345" [position]="{ my: 'center', at: 'center', of: windows }"></dxo-popup>
+            </dxo-editing>
+            <dxo-selection mode="single"></dxo-selection>
+            <dxo-filter-row [visible]="true"></dxo-filter-row>
+            <dxo-header-filter [visible]="true"></dxo-header-filter>
+            <dxo-search-panel [visible]="true" [width]="240" placeholder="Search..."></dxo-search-panel>
+            
+            <!-- <dxi-column dataField="VoucherNo" [width]="130" alignment="right" caption="Voucher No"> -->
+            <!-- <dxi-validation-rule type="required"></dxi-validation-rule> -->
+            <!-- </dxi-column> -->
+
+            <!-- <dxi-column dataField="Attachment" caption="Attachment" alignment="right" [width]="50" cellTemplate="CellTemplateAttachment"></dxi-column>
+            <div *dxTemplate="let data of 'CellTemplateAttachment'">
+                    <a href="javascript:void(0);"><i class="fa fa-paperclip" aria-hidden="true"></i></a>
+                </div> -->
+
+            <dxi-column dataField="VoucherDate" caption="Voucher Date" alignment="right" dataType="date" [visible]="false">
+                <dxi-validation-rule type="required"></dxi-validation-rule>
+            </dxi-column>
+
+            <dxi-column dataField="ReferenceNo" caption="Voucher Ref No" alignment="right" cellTemplate="CellTemplateRefNo">
+                    <div *dxTemplate="let data of 'CellTemplateRefNo'">
+                            <a href="javascript:void(0);" (click)="selectedReferenceNo(data)">{{data.data.ReferenceNo}}</a>
+                        </div>
+            </dxi-column>
+
+            <dxi-column dataField="OfficeId" caption="Office" alignment="right">
+                <dxo-lookup [dataSource]="officeCodeModel" displayExpr="OfficeName" valueExpr="OfficeId"></dxo-lookup>
+                <dxi-validation-rule type="required"></dxi-validation-rule>
+            </dxi-column>
+
+            <dxi-column dataField="JournalCode" caption="Journal" alignment="right">
+                <dxo-lookup [dataSource]="journalcodelist" displayExpr="JournalName" valueExpr="JournalCode"></dxo-lookup>
+                <dxi-validation-rule type="required"></dxi-validation-rule>
+            </dxi-column>
+
+            <dxi-column dataField="Description" caption="Description" alignment="right">
+                <dxi-validation-rule type="required"></dxi-validation-rule>
+            </dxi-column>
+
+            <dxi-column dataField="ChequeNo" caption="Cheque No" alignment="right" [visible]="false">
+                <dxi-validation-rule type="required"></dxi-validation-rule>
+            </dxi-column>
+
+            <dxi-column dataField="VoucherTypeId" caption="Voucher Type" alignment="right" [visible]="false">
+                <dxo-lookup [dataSource]="voucherTypeArr" displayExpr="VoucherTypeName" valueExpr="VoucherTypeId"></dxo-lookup>
+                <dxi-validation-rule type="required"></dxi-validation-rule>
+            </dxi-column>
+
+            <dxi-column dataField="CurrencyId" caption="Currency" [width]="125">
+                <dxo-lookup [dataSource]="currencyModel" displayExpr="CurrencyCode" valueExpr="CurrencyId"></dxo-lookup>
+                <dxi-validation-rule type="required"></dxi-validation-rule>
+            </dxi-column>
+
+            <dxi-column dataField="ProjectId" caption="Project" [width]="125" [visible]="false" [setCellValue]="setStateValue">
+                <dxo-lookup [dataSource]="projectArr" displayExpr="ProjectName" valueExpr="ProjectId"></dxo-lookup>
+            </dxi-column>
+
+            <dxi-column dataField="BudgetLineId" caption="BudgetLine" [width]="125" [visible]="false">
+                <dxo-lookup [dataSource]="budgetLineFilteredList" displayExpr="Description" valueExpr="BudgetLineId"></dxo-lookup>
+            </dxi-column>
+
+            <!-- <dxi-column dataField="documentId" caption="Document" alignment="right" cellTemplate="CellTemplateDocument"></dxi-column> -->
+
+            <dxi-column dataField="transaction" caption="Transaction" alignment="right" cellTemplate="CellTemplateTransaction"></dxi-column>
+
+            <!-- <div *dxTemplate="let data of 'CellTemplateDocument'">
+                <a [routerLink]="['./document']" (click)="sendRowData(data)">Document</a>
+            </div> -->
+
+            <div *dxTemplate="let data of 'CellTemplateTransaction'">
+                <a [routerLink]="['./transaction']" (click)="sendRowData(data)">Transaction</a>
+            </div>
+        </dx-data-grid>
+
+
+        <!-- <div class="doc-popftr">
+            <div class="doc-popftr-inside">
+                <div class="doc-popup-dwnload-icon">
+                    <a [href]="docpath" [download]="getfilename(docpath)">
+                        <i class="fa fa-download"></i>
+                    </a>
+                </div>
+                <div class="doc-popup-select-drop">
+                    <dx-select-box (onValueChanged)="selectDoc($event)" [dataSource]="voucherDocumentDetails" valueExpr="DocumentGUID" displayExpr="DocumentName"
+                        value="DocumentGUID">
+                    </dx-select-box>
+                </div>
+                <div class="doc-popup-ad-btn">
+                    <a href="javascript:void(0);" (click)="addDocument()">
+                        <i aria-hidden="true" class="fa fa-plus-circle"></i>
+                    </a>
+                </div>
+            </div>
+        </div> -->
+    </div>
+</div>
+
+
+<!-- Add chart of account -->
+<dx-popup class="popup doc-popup-content" [width]="800" [height]="500" [showTitle]="false" title="Vouchers Documents" [dragEnabled]="false"
+    [closeOnOutsideClick]="true" [(visible)]="popupVisibleDocument" [shading]="true" shadingColor="rgba(0, 0, 0, 0.5)">
+    <div *dxTemplate="let data of 'content'">
+
+        <!-- document  -->
+        <app-document [VoucherNo]="voucherNoMain" [docpath]="defaultDoc" [voucherDocumentDetails]="voucherDocumentDetails"></app-document>
+        <!-- <div class="doc-iframe-outer">
+            <iframe [src]="docpath" height="800px" width="400px"></iframe>
+        </div> -->
+    </div>
+</dx-popup>

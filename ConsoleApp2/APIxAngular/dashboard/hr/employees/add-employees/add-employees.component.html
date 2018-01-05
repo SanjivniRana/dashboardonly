@@ -1,0 +1,651 @@
+<div class="dx-field row">
+  <div class="col-sm-12">
+    <div class="main-heading clearfix">
+      <h3 class="page-heading">Add Employees </h3>
+      <dx-button class="button-info btn btn-default btn-green" text="Back" [routerLink]="['../employees']">
+      </dx-button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-offset-2 col-sm-3 text-right" style="margin-top: 8px; font-size: 18px;">
+      Select Info :
+    </div>
+    <div class="col-sm-5 text-left" style="max-width: 30rem;">
+      <dx-select-box [dataSource]="selectInfo" (onValueChanged)="onSelectInfoDropdown($event)" displayExpr="Name"
+        valueExpr="ID">
+      </dx-select-box>
+    </div>
+  </div>
+
+  <div class="text-center">
+    *Please select which Employee Details you wanna fill in
+  </div>
+  <br>
+  <hr>
+  <br>
+
+
+
+  <div *ngIf="selectEmployeeInfoDropdown==1">
+
+
+    <div>
+      <div class="row">
+        <div class="col-md-12">
+          <form action="your-action" (submit)="onGeneralInfoFormSubmit(generalInfo)">
+
+            <div class="btn-grp-wrap">
+              <dx-button text="Save" type="success" validationGroup="generalDetails" [useSubmitBehavior]="true"></dx-button>
+              <!-- <dx-button text="Cancel" (onClick)="HidePopup()"></dx-button> -->
+            </div>
+
+            <dx-form id="form" [formData]="generalInfo" [colCount]="2" [readOnly]="false" [showColonAfterLabel]="true" [showValidationSummary]="true"
+              validationGroup="generalDetails">
+
+              <!-- <dxi-item dataField="EmailTypeId" editorType="dxSelectBox" [editorOptions]="{
+			        dataSource: emailtypelistdata, 
+			        value: EmailTypeId,
+			        displayExpr: 'EmailTypeName',
+                    valueExpr: 'EmailTypeId'}">
+                <dxi-validation-rule type="required">
+                </dxi-validation-rule>
+              </dxi-item> -->
+              <dxi-item dataField="EmployeeCode">
+                <dxi-validation-rule type="required" message="Sender Email is required">
+                </dxi-validation-rule>
+              </dxi-item>
+              <dxi-item dataField="EmployeeName">
+                <dxi-validation-rule type="required" message="Sender Password is required">
+                </dxi-validation-rule>
+              </dxi-item>
+              <dxi-item dataField="IDCardNo">
+                <dxi-validation-rule type="required" message="Smtp Server is required">
+                </dxi-validation-rule>
+              </dxi-item>
+              <dxi-item dataField="FatherName">
+                <dxi-validation-rule type="required" message="Smtp Port is required">
+                </dxi-validation-rule>
+              </dxi-item>
+
+              <dxi-item dataField="Office">
+                <dxi-validation-rule type="required" message="Smtp Port is required">
+                </dxi-validation-rule>
+              </dxi-item>
+
+              <dxi-item dataField="Department">
+                <dxi-validation-rule type="required" message="Smtp Port is required">
+                </dxi-validation-rule>
+              </dxi-item>
+
+              <dxi-item dataField="Grade">
+                <dxi-validation-rule type="required" message="Smtp Port is required">
+                </dxi-validation-rule>
+              </dxi-item>
+
+              <dxi-item dataField="Designation">
+                <dxi-validation-rule type="required" message="Smtp Port is required">
+                </dxi-validation-rule>
+              </dxi-item>
+
+              <dxi-item dataField="PermanentAddress">
+                <dxi-validation-rule type="required" message="Smtp Port is required">
+                </dxi-validation-rule>
+              </dxi-item>
+
+              <dxi-item dataField="Village">
+                <dxi-validation-rule type="required" message="Smtp Port is required">
+                </dxi-validation-rule>
+              </dxi-item>
+
+              <dxi-item dataField="City">
+                <dxi-validation-rule type="required" message="Smtp Port is required">
+                </dxi-validation-rule>
+              </dxi-item>
+
+              <dxi-item dataField="District">
+                <dxi-validation-rule type="required" message="Smtp Port is required">
+                </dxi-validation-rule>
+              </dxi-item>
+
+              <dxi-item dataField="Province">
+                <dxi-validation-rule type="required" message="Smtp Port is required">
+                </dxi-validation-rule>
+              </dxi-item>
+
+              <dxi-item dataField="Country">
+                <dxi-validation-rule type="required" message="Smtp Port is required">
+                </dxi-validation-rule>
+              </dxi-item>
+
+              <dxi-item dataField="Phone">
+                <dxi-validation-rule type="required" message="Smtp Port is required">
+                </dxi-validation-rule>
+              </dxi-item>
+
+              <dxi-item dataField="Fax">
+                <dxi-validation-rule type="required" message="Smtp Port is required">
+                </dxi-validation-rule>
+              </dxi-item>
+
+              <dxi-item dataField="Email">
+                <dxi-validation-rule type="required" message="Smtp Port is required">
+                </dxi-validation-rule>
+              </dxi-item>
+
+              <dxi-item dataField="ReferredBy">
+                <dxi-validation-rule type="required" message="Smtp Port is required">
+                </dxi-validation-rule>
+              </dxi-item>
+
+
+              <dxi-item dataField="PassportNo">
+                <dxi-validation-rule type="required" message="Smtp Port is required">
+                </dxi-validation-rule>
+              </dxi-item>
+
+
+              <dxi-item dataField="Nationality">
+                <dxi-validation-rule type="required" message="Smtp Port is required">
+                </dxi-validation-rule>
+              </dxi-item>
+
+
+              <dxi-item dataField="Language">
+                <dxi-validation-rule type="required" message="Smtp Port is required">
+                </dxi-validation-rule>
+              </dxi-item>
+
+
+              <dxi-item dataField="Sex">
+                <dxi-validation-rule type="required" message="Smtp Port is required">
+                </dxi-validation-rule>
+              </dxi-item>
+
+
+              <dxi-item dataField="BirthDate">
+                <dxi-validation-rule type="required" message="Smtp Port is required">
+                </dxi-validation-rule>
+              </dxi-item>
+
+
+              <dxi-item dataField="BirthPlace">
+                <dxi-validation-rule type="required" message="Smtp Port is required">
+                </dxi-validation-rule>
+              </dxi-item>
+
+
+              <dxi-item dataField="Qualification">
+                <dxi-validation-rule type="required" message="Smtp Port is required">
+                </dxi-validation-rule>
+              </dxi-item>
+
+
+              <dxi-item dataField="CurrentAddress">
+                <dxi-validation-rule type="required" message="Smtp Port is required">
+                </dxi-validation-rule>
+              </dxi-item>
+
+
+              <dxi-item dataField="Experience">
+                <dxi-validation-rule type="required" message="Smtp Port is required">
+                </dxi-validation-rule>
+              </dxi-item>
+
+
+              <dxi-item dataField="Profession">
+                <dxi-validation-rule type="required" message="Smtp Port is required">
+                </dxi-validation-rule>
+              </dxi-item>
+
+
+              <dxi-item dataField="PreviousWork">
+                <dxi-validation-rule type="required" message="Smtp Port is required">
+                </dxi-validation-rule>
+              </dxi-item>
+
+
+              <dxi-item dataField="PreviousExperience">
+                <dxi-validation-rule type="required" message="Smtp Port is required">
+                </dxi-validation-rule>
+              </dxi-item>
+
+
+
+              <dxi-item dataField="Remarks">
+                <dxi-validation-rule type="required" message="Smtp Port is required">
+                </dxi-validation-rule>
+              </dxi-item>
+
+
+
+            </dx-form>
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+  </div>
+
+
+  <div *ngIf="selectEmployeeInfoDropdown==2">
+
+    <div>
+      <div class="row">
+        <div class="col-md-12">
+          <form action="your-action" (submit)="onGeneralInfoFormSubmit(professionalInfo)">
+
+            <div class="btn-grp-wrap">
+              <dx-button text="Save" type="success" validationGroup="generalDetails" [useSubmitBehavior]="true"></dx-button>
+              <!-- <dx-button text="Cancel" (onClick)="HidePopup()"></dx-button> -->
+            </div>
+
+            <dx-form id="form" [formData]="professionalInfo" [colCount]="3" [readOnly]="false" [showColonAfterLabel]="true" [showValidationSummary]="true"
+              validationGroup="generalDetails">
+
+              <!-- <dxi-item dataField="EmailTypeId" editorType="dxSelectBox" [editorOptions]="{
+                  dataSource: emailtypelistdata, 
+                  value: EmailTypeId,
+                  displayExpr: 'EmailTypeName',
+                        valueExpr: 'EmailTypeId'}">
+                    <dxi-validation-rule type="required">
+                    </dxi-validation-rule>
+                  </dxi-item> -->
+              <dxi-item dataField="Status">
+              </dxi-item>
+
+              <dxi-item dataField="Type">
+              </dxi-item>
+
+              <dxi-item dataField="StartDate">
+              </dxi-item>
+
+              <dxi-item dataField="EndDate">
+              </dxi-item>
+
+              <dxi-item dataField="ContactNo">
+              </dxi-item>
+
+              <dxi-item dataField="ContractPeriod">
+              </dxi-item>
+
+              <dxi-item dataField="HiredOn">
+              </dxi-item>
+
+              <dxi-item dataField="FiredOn">
+              </dxi-item>
+
+              <dxi-item dataField="FiredReason">
+              </dxi-item>
+
+              <dxi-item dataField="ResignedOn">
+              </dxi-item>
+
+              <dxi-item dataField="ResignedReason">
+              </dxi-item>
+
+              <dxi-item dataField="Currency">
+              </dxi-item>
+
+              <dxi-item dataField="MonthlyRate">
+              </dxi-item>
+
+              <dxi-item dataField="HourlyRate">
+              </dxi-item>
+
+              <dxi-item dataField="FoodAllowance">
+              </dxi-item>
+
+              <dxi-item dataField="TRAllowance">
+              </dxi-item>
+
+              <dxi-item dataField="MedicalAllowance">
+              </dxi-item>
+
+              <dxi-item dataField="OtherAllowance">
+              </dxi-item>
+
+
+              <dxi-item dataField="OtherDescription">
+              </dxi-item>
+
+
+              <dxi-item dataField="CapacityBuilding">
+              </dxi-item>
+
+              <dxi-item dataField="Security">
+              </dxi-item>
+
+              <dxi-item dataField="Fines">
+              </dxi-item>
+
+              <dxi-item dataField="Other">
+              </dxi-item>
+
+              <dxi-item dataField="FineReason">
+              </dxi-item>
+
+              <dxi-item dataField="JobDescription">
+              </dxi-item>
+
+              <dxi-item dataField="TrainingBenefits">
+              </dxi-item>
+
+            </dx-form>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div *ngIf="selectEmployeeInfoDropdown==3">
+
+
+
+    <div class="col-sm-12">
+      <div>
+        <dx-data-grid id="gridContainer" [dataSource]="analyticalInfo" [allowColumnReordering]="true" [allowColumnResizing]="true"
+          [columnAutoWidth]="true" (onEditingStart)="logEvent('EditingStart')" (onInitNewRow)="logEvent('InitNewRow')" (onRowInserting)="logEvent('RowInserting')"
+          (onRowInserted)="logEvent('RowInserted')" (onRowUpdated)="logEvent($event)" (onRowRemoving)="logEvent('RowRemoving')"
+          (onRowRemoved)="logEvent($event)">
+
+          <dxo-grouping [contextMenuEnabled]="true" expandMode="rowClick"></dxo-grouping>
+          <dxo-group-panel [visible]="false" emptyPanelText="Use the context menu of header columns to group data"></dxo-group-panel>
+          <dxo-header-filter [visible]="true"></dxo-header-filter>
+          <dxo-filter-row [visible]="true"></dxo-filter-row>
+          <dxo-selection mode="multiple"></dxo-selection>
+          <dxo-editing mode="popup" [allowAdding]="true" [allowUpdating]="true">
+            <dxo-popup title="Analytical Info" [showTitle]="true" [width]="700" [height]="345" [position]="{ my: 'center', at: 'center', of: window }"></dxo-popup>
+          </dxo-editing>
+
+          <dxi-column dataField="AccountCode" [allowEditing]="false" [width]="140"></dxi-column>
+          <dxi-column dataField="BLine"></dxi-column>
+          <dxi-column dataField="Area"></dxi-column>
+          <dxi-column dataField="Sector"></dxi-column>
+          <dxi-column dataField="Program"></dxi-column>
+          <dxi-column dataField="Project"></dxi-column>
+          <dxi-column dataField="Job"></dxi-column>
+          <dxi-column dataField="CostBook"></dxi-column>
+          <dxi-column dataField="SalaryPercentage"></dxi-column>
+
+          <dxo-paging [pageSize]="10"></dxo-paging>
+        </dx-data-grid>
+      </div>
+    </div>
+
+
+
+  </div>
+
+
+  <div *ngIf="selectEmployeeInfoDropdown==4">
+
+
+
+
+    <div class="col-sm-12">
+      <div>
+        <dx-data-grid id="gridContainer" [dataSource]="historyInfo" [allowColumnReordering]="true" [allowColumnResizing]="true" [columnAutoWidth]="true"
+          (onEditingStart)="logEvent('EditingStart')" (onInitNewRow)="logEvent('InitNewRow')" (onRowInserting)="logEvent('RowInserting')"
+          (onRowInserted)="logEvent('RowInserted')" (onRowUpdated)="logEvent($event)" (onRowRemoving)="logEvent('RowRemoving')"
+          (onRowRemoved)="logEvent($event)">
+
+          <dxo-grouping [contextMenuEnabled]="true" expandMode="rowClick"></dxo-grouping>
+          <dxo-group-panel [visible]="false" emptyPanelText="Use the context menu of header columns to group data"></dxo-group-panel>
+          <dxo-header-filter [visible]="true"></dxo-header-filter>
+          <dxo-filter-row [visible]="true"></dxo-filter-row>
+          <dxo-selection mode="multiple"></dxo-selection>
+          <dxo-editing mode="popup" [allowAdding]="true" [allowDeleting]="true">
+            <dxo-popup title="History" [showTitle]="true" [width]="700" [height]="345" [position]="{ my: 'center', at: 'center', of: window }"></dxo-popup>
+          </dxo-editing>
+
+          <dxi-column dataField="HistoryDate" [width]="140"></dxi-column>
+          <dxi-column dataField="Description"></dxi-column>
+        </dx-data-grid>
+      </div>
+    </div>
+
+
+
+  </div>
+
+
+  <div *ngIf="selectEmployeeInfoDropdown==5">
+
+
+
+
+    <div class="col-sm-12">
+      <div>
+        <dx-data-grid id="gridContainer" [dataSource]="advanceHistoryInfo" [allowColumnReordering]="true" [allowColumnResizing]="true"
+          [columnAutoWidth]="true" (onEditingStart)="logEvent('EditingStart')" (onInitNewRow)="logEvent('InitNewRow')" (onRowInserting)="logEvent('RowInserting')"
+          (onRowInserted)="logEvent('RowInserted')" (onRowUpdated)="logEvent($event)" (onRowRemoving)="logEvent('RowRemoving')"
+          (onRowRemoved)="logEvent($event)">
+
+          <dxo-grouping [contextMenuEnabled]="true" expandMode="rowClick"></dxo-grouping>
+          <dxo-group-panel [visible]="false" emptyPanelText="Use the context menu of header columns to group data"></dxo-group-panel>
+          <dxo-header-filter [visible]="true"></dxo-header-filter>
+          <dxo-filter-row [visible]="true"></dxo-filter-row>
+          <dxo-selection mode="multiple"></dxo-selection>
+
+          <dxi-column dataField="AdvanceDate" [width]="140"></dxi-column>
+          <dxi-column dataField="Currency"></dxi-column>
+          <dxi-column dataField="Description"></dxi-column>
+          <dxi-column dataField="VoucherRefNo"></dxi-column>
+          <dxi-column dataField="Amount"></dxi-column>
+
+        </dx-data-grid>
+      </div>
+    </div>
+
+
+
+
+  </div>
+
+
+  <div *ngIf="selectEmployeeInfoDropdown==6">
+
+
+
+
+
+    <div class="col-sm-12">
+      <div>
+        <dx-data-grid id="gridContainer" [dataSource]="payrollHistoryInfo" [allowColumnReordering]="true" [allowColumnResizing]="true"
+          [columnAutoWidth]="true" (onEditingStart)="logEvent('EditingStart')" (onInitNewRow)="logEvent('InitNewRow')" (onRowInserting)="logEvent('RowInserting')"
+          (onRowInserted)="logEvent('RowInserted')" (onRowUpdated)="logEvent($event)" (onRowRemoving)="logEvent('RowRemoving')"
+          (onRowRemoved)="logEvent($event)">
+
+          <dxo-grouping [contextMenuEnabled]="true" expandMode="rowClick"></dxo-grouping>
+          <dxo-group-panel [visible]="false" emptyPanelText="Use the context menu of header columns to group data"></dxo-group-panel>
+          <dxo-header-filter [visible]="true"></dxo-header-filter>
+          <dxo-filter-row [visible]="true"></dxo-filter-row>
+          <dxo-selection mode="multiple"></dxo-selection>
+
+          <dxi-column dataField="Office"></dxi-column>
+          <dxi-column dataField="Currency"></dxi-column>
+          <dxi-column dataField="Date"></dxi-column>
+          <dxi-column dataField="BasicPay"></dxi-column>
+          <dxi-column dataField="Attendence"></dxi-column>
+          <dxi-column dataField="Salary"></dxi-column>
+          <dxi-column dataField="Food"></dxi-column>
+          <dxi-column dataField="Medical"></dxi-column>
+          <dxi-column dataField="TAllowance"></dxi-column>
+          <dxi-column dataField="Other"></dxi-column>
+          <dxi-column dataField="OtherDescription"></dxi-column>
+          <dxi-column dataField="Gross"></dxi-column>
+          <dxi-column dataField="AdvDed"></dxi-column>
+          <dxi-column dataField="SalaryTax"></dxi-column>
+          <dxi-column dataField="CBDeb"></dxi-column>
+          <dxi-column dataField="Fines"></dxi-column>
+          <dxi-column dataField="Pension"></dxi-column>
+          <dxi-column dataField="Security"></dxi-column>
+          <dxi-column dataField="NetSalary"></dxi-column>
+          <dxi-column dataField="BudgetBalance"></dxi-column>
+          <dxi-column dataField="Details"></dxi-column>
+
+        </dx-data-grid>
+      </div>
+    </div>
+
+
+
+
+
+  </div>
+
+
+  <div *ngIf="selectEmployeeInfoDropdown==7">
+
+
+
+
+    <div class="col-sm-12">
+      <div>
+        <dx-data-grid id="gridContainer" [dataSource]="leaveRecordsInfo" [allowColumnReordering]="true" [allowColumnResizing]="true"
+          [columnAutoWidth]="true" (onEditingStart)="logEvent('EditingStart')" (onInitNewRow)="logEvent('InitNewRow')" (onRowInserting)="logEvent('RowInserting')"
+          (onRowInserted)="logEvent('RowInserted')" (onRowUpdated)="logEvent($event)" (onRowRemoving)="logEvent('RowRemoving')"
+          (onRowRemoved)="logEvent($event)">
+
+          <dxo-grouping [contextMenuEnabled]="true" expandMode="rowClick"></dxo-grouping>
+          <dxo-group-panel [visible]="false" emptyPanelText="Use the context menu of header columns to group data"></dxo-group-panel>
+          <dxo-header-filter [visible]="true"></dxo-header-filter>
+          <dxo-filter-row [visible]="true"></dxo-filter-row>
+          <dxo-selection mode="multiple"></dxo-selection>
+          <dxo-editing mode="popup" [allowAdding]="true" [allowDeleting]="true">
+            <dxo-popup title="History" [showTitle]="true" [width]="700" [height]="345" [position]="{ my: 'center', at: 'center', of: window }"></dxo-popup>
+          </dxo-editing>
+
+          <dxi-column dataField="Office"></dxi-column>
+          <dxi-column dataField="Date"></dxi-column>
+          <dxi-column dataField="AL"></dxi-column>
+          <dxi-column dataField="SL"></dxi-column>
+          <dxi-column dataField="EL"></dxi-column>
+          <dxi-column dataField="ML"></dxi-column>
+          <dxi-column dataField="Attendence"></dxi-column>
+          <dxi-column dataField="Absentees"></dxi-column>
+          <dxi-column dataField="Deput"></dxi-column>
+        </dx-data-grid>
+      </div>
+    </div>
+
+
+
+  </div>
+
+  <!-- Documents -->
+  <div *ngIf="selectEmployeeInfoDropdown==8">
+
+
+
+
+    <div class="col-sm-12">
+      <div>
+        <dx-data-grid id="gridContainer" [dataSource]="documentsInfo" [allowColumnReordering]="true" [allowColumnResizing]="true"
+          [columnAutoWidth]="true" (onEditingStart)="logEvent('EditingStart')" (onInitNewRow)="logEvent('InitNewRow')" (onRowInserting)="logEvent('RowInserting')"
+          (onRowInserted)="logEvent('RowInserted')" (onRowUpdated)="logEvent($event)" (onRowRemoving)="logEvent('RowRemoving')"
+          (onRowRemoved)="logEvent($event)">
+
+          <dxo-grouping [contextMenuEnabled]="true" expandMode="rowClick"></dxo-grouping>
+          <dxo-group-panel [visible]="false" emptyPanelText="Use the context menu of header columns to group data"></dxo-group-panel>
+          <dxo-header-filter [visible]="true"></dxo-header-filter>
+          <dxo-filter-row [visible]="true"></dxo-filter-row>
+          <dxo-selection mode="multiple"></dxo-selection>
+          <dxo-editing mode="popup" [allowAdding]="true" [allowUpdating]="true" [allowDeleting]="true">
+            <dxo-popup title="History" [showTitle]="true" [width]="700" [height]="345" [position]="{ my: 'center', at: 'center', of: window }"></dxo-popup>
+          </dxo-editing>
+
+          <dxi-column dataField="DocumentName" [width]="140"></dxi-column>
+          <!-- <dxi-column dataField="DocumentFile"></dxi-column> -->
+
+          <dxi-column dataField="DocumentFile" caption="Transaction" alignment="right" cellTemplate="CellTemplateTransaction">
+
+            <div *dxTemplate="let data of 'CellTemplateTransaction'">
+              <a [routerLink]="['./transaction']" (click)="sendRowData(data)">Transaction</a>
+            </div>
+
+          </dxi-column>
+
+        </dx-data-grid>
+      </div>
+    </div>
+
+
+
+  </div>
+
+
+  <!-- pension and salary tax -->
+  <div *ngIf="selectEmployeeInfoDropdown==9">
+
+    <div class="row text-center" style="font-size: 20px;">
+      <div class="col-sm-offset-3 col-sm-6">
+        <div class="col-sm-6">Pension: 000000</div>
+        <div class="col-sm-6">Salary Tax: 00000.00</div>
+      </div>
+
+    </div>
+    <br>
+
+    <div class="col-sm-12">
+      <div>
+        <dx-data-grid id="gridContainer" [dataSource]="pensionSalaryTaxInfo" [allowColumnReordering]="true" [allowColumnResizing]="true"
+          [columnAutoWidth]="true" (onEditingStart)="logEvent('EditingStart')" (onInitNewRow)="logEvent('InitNewRow')" (onRowInserting)="logEvent('RowInserting')"
+          (onRowInserted)="logEvent('RowInserted')" (onRowUpdated)="logEvent($event)" (onRowRemoving)="logEvent('RowRemoving')"
+          (onRowRemoved)="logEvent($event)">
+
+          <dxo-grouping [contextMenuEnabled]="true" expandMode="rowClick"></dxo-grouping>
+          <dxo-group-panel [visible]="false" emptyPanelText="Use the context menu of header columns to group data"></dxo-group-panel>
+          <dxo-header-filter [visible]="true"></dxo-header-filter>
+          <dxo-filter-row [visible]="true"></dxo-filter-row>
+          <dxo-selection mode="multiple"></dxo-selection>
+
+          <dxi-column dataField="DeductionType">
+            <dxo-lookup [dataSource]="deductionType" valueExpr="ID" displayExpr="Type">
+            </dxo-lookup>
+          </dxi-column>
+
+          <dxi-column dataField="Date"></dxi-column>
+          
+          <dxi-column dataField="Office">
+            <dxo-lookup [dataSource]="officeCode" valueExpr="OfficeId" displayExpr="OfficeName">
+            </dxo-lookup>
+          </dxi-column>
+
+          <dxi-column dataField="Currency">
+            <dxo-lookup [dataSource]="currency" valueExpr="CurrencyId" displayExpr="CurrencyCode">
+            </dxo-lookup>
+          </dxi-column>
+
+          <dxi-column dataField="Amount"></dxi-column>
+
+        </dx-data-grid>
+      </div>
+    </div>
+
+
+
+  </div>
+
+
+
+
+
+</div>
+
+
+
+<br>
+<br>
+<br>
+<br>

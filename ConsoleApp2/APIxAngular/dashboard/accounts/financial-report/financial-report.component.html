@@ -1,0 +1,170 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="main-heading clearfix">
+            <h3 class="page-heading">Financial Report</h3>
+        </div>
+    </div>
+    <div class="dx-field">
+        <div class="dx-field-value">
+            <dx-select-box [dataSource]="data" displayExpr="Year" valueExpr="ID" placeholder="Select Financial Year" [showClearButton]="true"
+                (onValueChanged)="selectedFinancialYear($event)"></dx-select-box>
+        </div>
+    </div>
+    <div class="col-sm-12">
+
+
+
+        <div>
+            <div id="tabs">
+                <!-- <div class="caption">API</div> -->
+                <dx-tabs #apiTabs [dataSource]="tabs" [selectedIndex]="0" (onItemClick)="selectTab($event)"></dx-tabs>
+
+                <!-- Tab 1   -->
+                <div *ngIf="showSelectedTab==0">
+                    <dx-data-grid id="gridContainer" [dataSource]="tab1" [columnHidingEnabled]="true">
+                        <!-- <dxo-export [enabled]="true" fileName="Orders"></dxo-export> -->
+                        <dxo-editing [allowAdding]="false" [allowUpdating]="false" mode="batch"></dxo-editing>
+                        <dxo-grouping [contextMenuEnabled]="true" expandMode="rowClick"></dxo-grouping>
+                        <dxo-group-panel [visible]="false" emptyPanelText="Use the context menu of header columns to group data"></dxo-group-panel>
+                        <dxo-header-filter [visible]="true">
+                        </dxo-header-filter>
+                        <dxo-selection mode="multiple">
+                        </dxo-selection>
+                        <dxo-filter-row [visible]="showFilterRow">
+                        </dxo-filter-row>
+                        <dxi-column dataField="Code"></dxi-column>
+                        <dxi-column dataField="AccountName"></dxi-column>
+                        <dxi-column dataField="Notes"></dxi-column>
+                        <dxo-paging [pageSize]="10"></dxo-paging>
+                        <!-- <dxo-pager
+                           [allowedPageSizes]="[5, 8, 15, 30]"
+                           [showInfo]="true"
+                           [showNavigationButtons]="true"
+                           [showPageSizeSelector]="true"
+                           [visible]="true">
+                       </dxo-pager>  -->
+                        <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
+                    </dx-data-grid>
+                </div>
+
+                <!-- Tab 2   -->
+
+                <div *ngIf="showSelectedTab==1">
+                    <dx-data-grid id="gridContainer" [dataSource]="tab2" [columnHidingEnabled]="true">
+                        <!-- <dxo-export [enabled]="true" fileName="Orders"></dxo-export> -->
+                        <dxo-editing [allowAdding]="false" [allowUpdating]="false" mode="batch"></dxo-editing>
+                        <dxo-grouping [contextMenuEnabled]="true" expandMode="rowClick"></dxo-grouping>
+                        <dxo-group-panel [visible]="false" emptyPanelText="Use the context menu of header columns to group data"></dxo-group-panel>
+                        <dxo-header-filter [visible]="true">
+                        </dxo-header-filter>
+                        <dxo-selection mode="multiple">
+                        </dxo-selection>
+                        <dxo-filter-row [visible]="showFilterRow">
+                        </dxo-filter-row>
+                        <dxi-column dataField="Code"></dxi-column>
+                        <dxi-column dataField="Narration"></dxi-column>
+                        <dxi-column dataField="Notes"></dxi-column>
+                        <dxi-column dataField="BalanceType"></dxi-column>
+                        <dxo-paging [pageSize]="10"></dxo-paging>
+                        <!-- <dxo-pager
+                               [allowedPageSizes]="[5, 8, 15, 30]"
+                               [showInfo]="true"
+                               [showNavigationButtons]="true"
+                               [showPageSizeSelector]="true"
+                               [visible]="true">
+                           </dxo-pager>  -->
+                        <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
+                    </dx-data-grid>
+                </div>
+
+                <!-- Tab 3   -->
+
+                <div *ngIf="showSelectedTab==2">
+                    <dx-data-grid id="gridContainer" [dataSource]="tab3" [columnHidingEnabled]="true">
+                        <!-- <dxo-export [enabled]="true" fileName="Orders"></dxo-export> -->
+                        <dxo-editing [allowAdding]="false" [allowUpdating]="false" mode="batch"></dxo-editing>
+                        <dxo-grouping [contextMenuEnabled]="true" expandMode="rowClick"></dxo-grouping>
+                        <dxo-group-panel [visible]="false" emptyPanelText="Use the context menu of header columns to group data"></dxo-group-panel>
+                        <dxo-header-filter [visible]="true">
+                        </dxo-header-filter>
+                        <dxo-selection mode="multiple">
+                        </dxo-selection>
+                        <dxo-filter-row [visible]="showFilterRow">
+                        </dxo-filter-row>
+                        <dxi-column dataField="Description"></dxi-column>
+                        <dxi-column dataField="Currency"></dxi-column>
+                        <dxi-column dataField="Notes"></dxi-column>
+                        <dxi-column dataField="Balance"></dxi-column>
+                        <dxo-paging [pageSize]="10"></dxo-paging>
+                        <!-- <dxo-pager
+                           [allowedPageSizes]="[5, 8, 15, 30]"
+                           [showInfo]="true"
+                           [showNavigationButtons]="true"
+                           [showPageSizeSelector]="true"
+                           [visible]="true">
+                       </dxo-pager>  -->
+                        <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
+                    </dx-data-grid>
+                </div>
+
+                <!-- tab 4 -->
+                <div *ngIf="showSelectedTab==3">
+                    <dx-data-grid id="gridContainer" [dataSource]="tab4" [columnHidingEnabled]="true">
+                        <!-- <dxo-export [enabled]="true" fileName="Orders"></dxo-export> -->
+                        <dxo-editing [allowAdding]="false" [allowUpdating]="false" mode="batch"></dxo-editing>
+                        <dxo-grouping [contextMenuEnabled]="true" expandMode="rowClick"></dxo-grouping>
+                        <dxo-group-panel [visible]="false" emptyPanelText="Use the context menu of header columns to group data"></dxo-group-panel>
+                        <dxo-header-filter [visible]="true">
+                        </dxo-header-filter>
+                        <dxo-selection mode="multiple">
+                        </dxo-selection>
+                        <dxo-filter-row [visible]="showFilterRow">
+                        </dxo-filter-row>
+                        <dxi-column dataField="Description"></dxi-column>
+                        <dxi-column dataField="Currency"></dxi-column>
+                        <dxi-column dataField="Notes"></dxi-column>
+                        <dxi-column dataField="Balance"></dxi-column>
+                        <dxo-paging [pageSize]="10"></dxo-paging>
+                        <!-- <dxo-pager
+                       [allowedPageSizes]="[5, 8, 15, 30]"
+                       [showInfo]="true"
+                       [showNavigationButtons]="true"
+                       [showPageSizeSelector]="true"
+                       [visible]="true">
+                   </dxo-pager>  -->
+                        <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
+                    </dx-data-grid>
+                </div>
+
+                <!-- tab 5 -->
+                <div *ngIf="showSelectedTab==4  ">
+                    <dx-data-grid id="gridContainer" [dataSource]="tab5" [columnHidingEnabled]="true">
+                        <!-- <dxo-export [enabled]="true" fileName="Orders"></dxo-export> -->
+                        <dxo-editing [allowAdding]="false" [allowUpdating]="false" mode="batch"></dxo-editing>
+                        <dxo-grouping [contextMenuEnabled]="true" expandMode="rowClick"></dxo-grouping>
+                        <dxo-group-panel [visible]="false" emptyPanelText="Use the context menu of header columns to group data"></dxo-group-panel>
+                        <dxo-header-filter [visible]="true">
+                        </dxo-header-filter>
+                        <dxo-selection mode="multiple">
+                        </dxo-selection>
+                        <dxo-filter-row [visible]="showFilterRow">
+                        </dxo-filter-row>
+                        <dxi-column dataField="AccountCode"></dxi-column>
+                        <dxi-column dataField="AccountName"></dxi-column>
+                        <dxi-column dataField="Currency"></dxi-column>
+                        <dxi-column dataField="Notes"></dxi-column>
+                        <dxi-column dataField="Balance"></dxi-column>
+                        <dxo-paging [pageSize]="10"></dxo-paging>
+                        <!-- <dxo-pager
+                           [allowedPageSizes]="[5, 8, 15, 30]"
+                           [showInfo]="true"
+                           [showNavigationButtons]="true"
+                           [showPageSizeSelector]="true"
+                           [visible]="true">
+                       </dxo-pager>  -->
+                        <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
+                    </dx-data-grid>
+                </div>
+            </div>
+        </div>
+    </div>

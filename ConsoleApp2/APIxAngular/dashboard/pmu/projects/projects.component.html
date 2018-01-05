@@ -1,0 +1,651 @@
+<div class="heading-hdr">
+    <div class="main-heading clearfix">
+        <h3 class="page-heading">Projects</h3>
+    </div>
+</div>
+<div class="employee-details-outer">
+    <div class="row" id="task-activity">
+        <div class="col-xs-12 col-sm-4 col-md-3 project-left-part-outer">
+            <div class="emp-left-part">
+                <div class="emp-list-hdr">
+                    <div class="emp-add-btn">
+                        <a (click)="addProjectModal(1)">
+                            <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="emp-listing project-left-listing">
+                    <!-- <div class="emp-search-bx">
+                        <form>
+                            <div class="em-search-bx-in">
+                                <input class="form-control" type="search" placeholder="Search Projects" />
+                            </div>
+                        </form>
+                    </div> -->
+                    <!-- <ul>
+                        <li *ngFor="let item of projectList">
+                            <a href="javascript:void(0);" (click)="selectedProject(item)">
+                                <div class="emp-list-img project-icon-bx">
+                                    <div class="pro-list-icon">
+                                        <i class="fa fa-file-text" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                                <div class="emp-list-txt">
+                                    <h4>{{item.ProjectName}}</h4>
+                                    <p>{{item.Description}}</p>
+                                </div>
+                            </a>
+                        </li>
+                    </ul> -->
+                    <dx-list #list [dataSource]="projectList" [height]="400" [searchEnabled]="true" searchExpr="ProjectName" searchMode="contains">
+                        <div *dxTemplate="let data of 'item'">
+                            <a href="javascript:void(0);" (click)="selectedProject(data)">
+                                <div>{{data.ProjectName}}</div>
+                                <div>{{data.Description}}</div>
+                            </a>
+                        </div>
+                    </dx-list>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-8 col-md-9 emp-right-part-outer">
+            <div class="emp-right-part">
+                <div class="emp-right-part-hdr">
+                    <h3>{{selectedProjectName}}</h3>
+                    <p>{{selectedProjectDescription}}</p>
+                </div>
+
+                <div id="tabs">
+
+                    <dx-tabs #apiTabs [dataSource]="showInfoTabs" [selectedIndex]="0" (onItemClick)="openInfoTabs($event)"></dx-tabs>
+
+                    <!-- Tab 1 -->
+                    <div *ngIf="openInfoTab==0">
+                        <div class="btn-grp-wrap">
+                            <dx-button text="Edit" (onClick)="addProjectModal(2)">
+                            </dx-button>
+                        </div>
+                        <!-- <dx-popover target="#link1" position="top" [width]="300" [shading]="true" shadingColor="rgba(0, 0, 0, 0.5)" [(visible)]="defaultVisible">
+                            <div *dxTemplate="let data = model of 'content'">
+                                <dx-data-grid id="gridContainer" [dataSource]="projectBudgetLine" [allowColumnReordering]="true" [allowColumnResizing]="true"
+                                    [columnAutoWidth]="true" (onEditingStart)="logEvent('EditingStart',$event)" (onInitNewRow)="logEvent('InitNewRow',$event)"
+                                    (onRowInserting)="logEvent('RowInserting',$event)" (onRowInserted)="logEvent('RowInserted',$event)"
+                                    (onRowUpdating)="logEvent('RowUpdating',$event)" (onRowUpdated)="logEvent('RowUpdated',$event)"
+                                    (onRowRemoving)="logEvent('RowRemoving',$event)" (onRowRemoved)="logEvent('RowRemoved',$event)">
+                                    <dxo-paging [pageSize]="5"></dxo-paging>
+                                    <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5, 10, 20]" [showInfo]="true"></dxo-pager>
+                                    <dxo-filter-row [visible]="true"></dxo-filter-row>
+                                    <dxo-header-filter [visible]="true"></dxo-header-filter>
+                                    <dxo-editing mode="popup" [allowUpdating]="true" [allowAdding]="true" [form]="{
+                          items: ['BudgetLineTypeId','Description','AmountReceivable','AmountPayable'] , colCount: '1'}">
+                                        <dxo-popup title="Add/Edit Project Budget Line" [showTitle]="true" [width]="700" [height]="345" [position]="{ my: 'center', at: 'center', of: windows }"></dxo-popup>
+                                    </dxo-editing>
+                                    <dxi-column dataField="ProjectId" caption="Project" [visible]="false">
+                                        <dxo-lookup [dataSource]="projectList" displayExpr="ProjectName" valueExpr="ProjectId"></dxo-lookup>
+                                    </dxi-column>
+
+                                    <dxi-column dataField="BudgetLineId" caption="Budget Line Id" alignment="right" [visible]="false">
+                                    </dxi-column>
+
+                                    <dxi-column dataField="BudgetLineTypeId" caption="B/L Type">
+                                        <dxo-lookup [dataSource]="BudgetLineTypeArr" displayExpr="BudgetLineTypeName" valueExpr="BudgetLineTypeId"></dxo-lookup>
+                                    </dxi-column>
+
+                                    <dxi-column dataField="Description" caption="Description" alignment="right">
+                                    </dxi-column>
+
+                                    <dxi-column dataField="AmountReceivable" caption="Amount Receivable" alignment="right">
+                                    </dxi-column>
+
+                                    <dxi-column dataField="AmountPayable" caption="Amount Payable" alignment="right">
+                                    </dxi-column>
+
+                                    <dxi-column dataField="AddReceivable" caption="Installment" cellTemplate="CellTemplateBudgetLine"></dxi-column>
+                                    <div *dxTemplate="let data of 'CellTemplateBudgetLine'">
+                                        <a href="javascript:void(0);" (click)="addReceivableClicked(data)">Receivable</a>
+                                    </div>
+                                </dx-data-grid>
+                            </div>
+                        </dx-popover> -->
+                        <div class="porject-des-listing">
+                            <ul>
+                                <li>
+                                    <h4>Project Name :</h4>
+                                    <span>{{projectModel.ProjectName}}</span>
+                                    <!-- <a id="link1" (click)="toggleDefault()"> </a>-->
+                                </li>
+                                <li>
+                                    <h4>Description :</h4>
+                                    <span>{{projectModel.Description}}</span>
+                                </li>
+                                <li>
+                                    <h4>StartDate : </h4>
+                                    <span>{{projectModel.StartDate | date}}</span>
+                                </li>
+                                <li>
+                                    <h4>EndDate : </h4>
+                                    <span>{{projectModel.EndDate | date}}</span>
+                                </li>
+                                <li>
+                                    <h4>Currency : </h4>
+                                    <span>{{projectModel.CurrencyId}}</span>
+                                </li>
+                                <li>
+                                    <h4>Budget : </h4>
+                                    <span>{{projectModel.Budget}}</span>
+                                </li>
+                                <li>
+                                    <h4>Receivable Amount : </h4>
+                                    <span>{{projectModel.ReceivableAmount}}</span>
+                                </li>
+                                <li>
+                                    <h4>Payable Amount : </h4>
+                                    <span>{{projectModel.PayableAmount}}</span>
+                                </li>
+                                <li>
+                                    <h4>Current Balance : </h4>
+                                    <span>{{projectModel.CurrentBalance}}</span>
+                                </li>
+                                <li>
+                                    <h4>Status : </h4>
+                                    <span>{{projectModel.Status}}</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Tab 2 -->
+                    <div *ngIf="openInfoTab==1">
+                        <br>
+                        <br>
+                        <div>
+                            <dx-data-grid id="gridContainer" [dataSource]="voucherDocumentDetails">
+                                <dxo-paging [pageSize]="10"></dxo-paging>
+                                <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5, 10, 20]" [showInfo]="true">
+                                </dxo-pager>
+
+                                <!-- editing -->
+                                <dxo-editing mode="popup" [allowDeleting]="true" [form]="{ items: ['DocumentName'] }">
+                                    <dxo-popup title="Project Document" [showTitle]="true" [width]="700" [height]="345" [position]="{ my: 'center', at: 'center', of: windows }">
+                                    </dxo-popup>
+                                </dxo-editing>
+                                <!-- editing -->
+
+                                <dxi-column dataField="DocumentName" caption="Document Name" alignment="right"></dxi-column>
+                                <dxi-column dataField="documentId" caption="Document File" alignment="right" cellTemplate="CellTemplateDocumentFile"></dxi-column>
+                                <!-- <dxi-column dataField="documentId" caption="Delete" alignment="right" cellTemplate="CellTemplateDocumentDelete"></dxi-column> -->
+                                <div *dxTemplate="let data of 'CellTemplateDocumentFile'">
+                                    <!-- <a href="javascript:void()" (click)="documentAdd()">Document</a> -->
+                                    <!-- <a href="javascript:void()">Download</a> -->
+                                    <a [href]="filePath(data)" target="_blank" [download]="getfilename(data)">Download</a>
+                                </div>
+
+                                <!-- <div *dxTemplate="let data of 'CellTemplateDocumentDelete'">
+                                            <a href="javascript:void()">Delete</a>
+                                        </div> -->
+                            </dx-data-grid>
+                        </div>
+                    </div>
+
+                    <!-- Tab 3  -->
+                    <div *ngIf="openInfoTab==2" class="project-details-tab-3">
+                        <div *ngIf="AddReceivable==0">
+                            <dx-data-grid id="gridContainer" [dataSource]="projectBudgetLine" [allowColumnReordering]="true" [allowColumnResizing]="true"
+                                [columnAutoWidth]="true" (onEditingStart)="logEvent('EditingStart',$event)" (onInitNewRow)="logEvent('InitNewRow',$event)"
+                                (onRowInserting)="logEvent('RowInserting',$event)" (onRowInserted)="logEvent('RowInserted',$event)"
+                                (onRowUpdating)="logEvent('RowUpdating',$event)" (onRowUpdated)="logEvent('RowUpdated',$event)"
+                                (onRowRemoving)="logEvent('RowRemoving',$event)" (onRowRemoved)="logEvent('RowRemoved',$event)">
+                                <dxo-paging [pageSize]="5"></dxo-paging>
+                                <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5, 10, 20]" [showInfo]="true"></dxo-pager>
+                                <dxo-filter-row [visible]="true"></dxo-filter-row>
+                                <dxo-header-filter [visible]="true"></dxo-header-filter>
+                                <dxo-editing mode="popup" [allowUpdating]="true" [allowAdding]="true" [form]="{
+                                  items: ['BudgetLineTypeId','Description','AmountReceivable','AmountPayable'] , colCount: '1', shading :'false', shadingColor :'rgba(0, 0, 0, 0.5)'}">
+                                    <dxo-popup title="Add/Edit Project Budget Line" [showTitle]="true" [width]="700" [height]="345" [position]="{ my: 'center', at: 'center', of: windows }"></dxo-popup>
+                                </dxo-editing>
+                                <dxi-column dataField="ProjectId" caption="Project" [visible]="false">
+                                    <dxo-lookup [dataSource]="projectList" displayExpr="ProjectName" valueExpr="ProjectId"></dxo-lookup>
+                                </dxi-column>
+
+                                <dxi-column dataField="BudgetLineId" caption="Budget Line Id" alignment="right" [visible]="false">
+                                </dxi-column>
+
+                                <dxi-column dataField="BudgetLineTypeId" caption="B/L Type">
+                                    <dxo-lookup [dataSource]="BudgetLineTypeArr" displayExpr="BudgetLineTypeName" valueExpr="BudgetLineTypeId"></dxo-lookup>
+                                </dxi-column>
+
+                                <dxi-column dataField="Description" caption="Description" alignment="right">
+                                </dxi-column>
+
+                                <dxi-column dataField="AmountReceivable" caption="Amount Receivable" alignment="right">
+                                </dxi-column>
+
+                                <dxi-column dataField="AddReceivable" caption="Installment" cellTemplate="CellTemplateBudgetLineReceivable"></dxi-column>
+                                <div *dxTemplate="let data of 'CellTemplateBudgetLineReceivable'">
+                                    <a href="javascript:void(0);" (click)="addReceivableClicked(data)">Receivable</a>
+                                </div>
+
+                                <dxi-column dataField="AmountPayable" caption="Amount Payable" alignment="right">
+                                </dxi-column>
+
+                                <dxi-column dataField="AddPayable" caption="Installment" cellTemplate="CellTemplateBudgetLinePayable"></dxi-column>
+                                <div *dxTemplate="let data of 'CellTemplateBudgetLinePayable'">
+                                    <a href="javascript:void(0);" (click)="addPayableClicked(data)">Payable</a>
+                                </div>
+                            </dx-data-grid>
+                        </div>
+                        <div *ngIf="AddReceivable==1">
+                            <div class="btn-grp-wrap">
+                                <dx-button text="Back" (onClick)="ShowBudgetLineGrid(0)">
+                                </dx-button>
+                            </div>
+                            <dx-data-grid id="gridContainer1" [dataSource]="projectBudgetReceivable" [allowColumnReordering]="true" [allowColumnResizing]="true"
+                                [columnAutoWidth]="true" (onEditingStart)="logEventReceivable('EditingStart',$event)" (onInitNewRow)="logEventReceivable('InitNewRow',$event)"
+                                (onRowInserting)="logEventReceivable('RowInserting',$event)" (onRowInserted)="logEventReceivable('RowInserted',$event)"
+                                (onRowUpdating)="logEventReceivable('RowUpdating',$event)" (onRowUpdated)="logEventReceivable('RowUpdated',$event)"
+                                (onRowRemoving)="logEventReceivable('RowRemoving',$event)" (onRowRemoved)="logEventReceivable('RowRemoved',$event)">
+                                <dxo-paging [pageSize]="10"></dxo-paging>
+                                <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5, 10, 20]" [showInfo]="true"></dxo-pager>
+                                <dxo-filter-row [visible]="true"></dxo-filter-row>
+                                <dxo-header-filter [visible]="true"></dxo-header-filter>
+                                <dxo-editing mode="popup" [allowUpdating]="true" [allowAdding]="true" [form]="{
+                                  items: ['ExpectedDate','Amount'], colCount: '1' }">
+                                    <dxo-popup title="Add/Edit Budget Line Receivable" [showTitle]="true" [width]="700" [height]="345" [position]="{ my: 'center', at: 'center', of: windows }"></dxo-popup>
+                                </dxo-editing>
+
+                                <dxi-column dataField="BudgetReceivalbeId" caption="BudgetReceivalbeId" [visible]="false">
+                                </dxi-column>
+
+                                <dxi-column dataField="ProjectName" caption="Project">
+                                    <dxo-lookup [dataSource]="projectList" displayExpr="ProjectName" valueExpr="ProjectName"></dxo-lookup>
+                                </dxi-column>
+
+                                <dxi-column dataField="BudgetLineTypeId" caption="B/L Type">
+                                    <dxo-lookup [dataSource]="BudgetLineTypeArr" displayExpr="BudgetLineTypeName" valueExpr="BudgetLineTypeId"></dxo-lookup>
+                                </dxi-column>
+
+                                <dxi-column dataField="Description" caption="Description" alignment="right">
+                                </dxi-column>
+
+                                <dxi-column dataField="ExpectedDate" caption="Expected Date" dataType="date">
+                                </dxi-column>
+
+                                <dxi-column dataField="Amount" caption="Amount" alignment="right">
+                                </dxi-column>
+
+                                <dxi-column dataField="AddReceivable" caption="Installment" cellTemplate="CellTemplateBudgetLineReceived"></dxi-column>
+                                <div *dxTemplate="let data of 'CellTemplateBudgetLineReceived'">
+                                    <a href="javascript:void(0);" (click)="addReceivedClicked(data)">Received Amount</a>
+                                </div>
+
+                            </dx-data-grid>
+                        </div>
+                        <div *ngIf="AddReceivable==2">
+                            <div class="btn-grp-wrap">
+                                <dx-button text="Back" (onClick)="ShowBudgetLineGrid(1)">
+                                </dx-button>
+                            </div>
+                            <dx-data-grid id="gridContainer1" [dataSource]="projectBudgetReceived" [allowColumnReordering]="true" [allowColumnResizing]="true"
+                                [columnAutoWidth]="true" (onEditingStart)="logEventReceivedAmount('EditingStart',$event)" (onInitNewRow)="logEventReceivedAmount('InitNewRow',$event)"
+                                (onRowInserting)="logEventReceivedAmount('RowInserting',$event)" (onRowInserted)="logEventReceivedAmount('RowInserted',$event)"
+                                (onRowUpdating)="logEventReceivedAmount('RowUpdating',$event)" (onRowUpdated)="logEventReceivedAmount('RowUpdated',$event)"
+                                (onRowRemoving)="logEventReceivedAmount('RowRemoving',$event)" (onRowRemoved)="logEventReceivedAmount('RowRemoved',$event)">
+                                <dxo-paging [pageSize]="10"></dxo-paging>
+                                <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5, 10, 20]" [showInfo]="true"></dxo-pager>
+                                <dxo-filter-row [visible]="true"></dxo-filter-row>
+                                <dxo-header-filter [visible]="true"></dxo-header-filter>
+                                <dxo-editing mode="popup" [allowUpdating]="true" [allowAdding]="true" [form]="{
+                                      items: ['ReceivedDate','Amount','Remark'], colCount: '1' }">
+                                    <dxo-popup title="Add/Edit Receivable Installment" [showTitle]="true" [width]="700" [height]="345" [position]="{ my: 'center', at: 'center', of: windows }"></dxo-popup>
+                                </dxo-editing>
+
+                                <dxi-column dataField="BudgetReceivedAmountId" caption="BudgetReceivedAmountId" [visible]="false">
+                                </dxi-column>
+
+                                <dxi-column dataField="BudgetReceivalbeId" caption="BudgetReceivalbeId" [visible]="false">
+                                </dxi-column>
+
+                                <dxi-column dataField="ProjectName" caption="Project">
+                                    <dxo-lookup [dataSource]="projectList" displayExpr="ProjectName" valueExpr="ProjectName"></dxo-lookup>
+                                </dxi-column>
+
+                                <dxi-column dataField="BudgetLineName" caption="B/L Type">
+                                </dxi-column>
+
+                                <dxi-column dataField="ReceivedDate" caption="Received Date" dataType="date">
+                                </dxi-column>
+
+                                <dxi-column dataField="Amount" caption="Amount" alignment="right" datatype="number" [setCellValue]="setStateValue">
+                                    <dxi-validation-rule type="required" [pattern]="pattern" message="message"></dxi-validation-rule>
+                                </dxi-column>
+                                <!-- <div *dxTemplate="let d of 'diffCellTemplate'">
+                                    <dx-number-box [min]="0" [max]="SelectedRowAmount" [showSpinButtons]="true" [showClearButton]="true">
+                                    </dx-number-box>
+                                </div> -->
+
+                                <dxi-column dataField="Remark" caption="Remark" alignment="right">
+                                </dxi-column>
+
+                            </dx-data-grid>
+                        </div>
+
+                        <!-- Payble Link Clicked -->
+                        <div *ngIf="AddReceivable==3">
+                            <div class="btn-grp-wrap">
+                                <dx-button text="Back" (onClick)="ShowBudgetLineGrid(0)">
+                                </dx-button>
+                            </div>
+                            <dx-data-grid id="gridContainer1" [dataSource]="projectBudgetPayable" [allowColumnReordering]="true" [allowColumnResizing]="true"
+                                [columnAutoWidth]="true" (onEditingStart)="logEventPayable('EditingStart',$event)" (onInitNewRow)="logEventPayable('InitNewRow',$event)"
+                                (onRowInserting)="logEventPayable('RowInserting',$event)" (onRowInserted)="logEventPayable('RowInserted',$event)"
+                                (onRowUpdating)="logEventPayable('RowUpdating',$event)" (onRowUpdated)="logEventPayable('RowUpdated',$event)"
+                                (onRowRemoving)="logEventPayable('RowRemoving',$event)" (onRowRemoved)="logEventPayable('RowRemoved',$event)">
+                                <dxo-paging [pageSize]="10"></dxo-paging>
+                                <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5, 10, 20]" [showInfo]="true"></dxo-pager>
+                                <dxo-filter-row [visible]="true"></dxo-filter-row>
+                                <dxo-header-filter [visible]="true"></dxo-header-filter>
+                                <dxo-editing mode="popup" [allowUpdating]="true" [allowAdding]="true" [form]="{
+                                  items: ['ExpectedDate','Amount'], colCount: '1' }">
+                                    <dxo-popup title="Add/Edit Budget Line Payable" [showTitle]="true" [width]="700" [height]="345" [position]="{ my: 'center', at: 'center', of: windows }"></dxo-popup>
+                                </dxo-editing>
+
+                                <dxi-column dataField="BudgetPayableId" caption="BudgetPayableId" [visible]="false">
+                                </dxi-column>
+
+                                <dxi-column dataField="ProjectName" caption="Project">
+                                    <dxo-lookup [dataSource]="projectList" displayExpr="ProjectName" valueExpr="ProjectName"></dxo-lookup>
+                                </dxi-column>
+
+                                <dxi-column dataField="BudgetLineTypeName" caption="Budget Line">
+                                </dxi-column>
+
+                                <dxi-column dataField="ExpectedDate" caption="Expected Date" dataType="date">
+                                </dxi-column>
+
+                                <dxi-column dataField="Amount" caption="Amount" alignment="right">
+                                </dxi-column>
+
+                                <dxi-column dataField="AddReceivable" caption="Installment" cellTemplate="CellTemplateBudgetLineReceived"></dxi-column>
+                                <div *dxTemplate="let data of 'CellTemplateBudgetLineReceived'">
+                                    <a href="javascript:void(0);" (click)="addPayableAmountClicked(data)">Payable Amount</a>
+                                </div>
+
+                            </dx-data-grid>
+                        </div>
+                        <div *ngIf="AddReceivable==4">
+                            <div class="btn-grp-wrap">
+                                <dx-button text="Back" (onClick)="ShowBudgetLineGrid(3)">
+                                </dx-button>
+                            </div>
+                            <dx-data-grid id="gridContainer1" [dataSource]="projectBudgetPaid" [allowColumnReordering]="true" [allowColumnResizing]="true"
+                                [columnAutoWidth]="true" (onEditingStart)="logEventPaidAmount('EditingStart',$event)" (onInitNewRow)="logEventPaidAmount('InitNewRow',$event)"
+                                (onRowInserting)="logEventPaidAmount('RowInserting',$event)" (onRowInserted)="logEventPaidAmount('RowInserted',$event)"
+                                (onRowUpdating)="logEventPaidAmount('RowUpdating',$event)" (onRowUpdated)="logEventPaidAmount('RowUpdated',$event)"
+                                (onRowRemoving)="logEventPaidAmount('RowRemoving',$event)" (onRowRemoved)="logEventPaidAmount('RowRemoved',$event)">
+                                <dxo-paging [pageSize]="10"></dxo-paging>
+                                <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5, 10, 20]" [showInfo]="true"></dxo-pager>
+                                <dxo-filter-row [visible]="true"></dxo-filter-row>
+                                <dxo-header-filter [visible]="true"></dxo-header-filter>
+                                <dxo-editing mode="popup" [allowUpdating]="true" [allowAdding]="true" [form]="{
+                                      items: ['PaymentDate','Amount','Remark'], colCount: '1' }">
+                                    <dxo-popup title="Add/Edit Payable Installment" [showTitle]="true" [width]="700" [height]="345" [position]="{ my: 'center', at: 'center', of: windows }"></dxo-popup>
+                                </dxo-editing>
+
+                                <dxi-column dataField="BudgetPayableAmountId" caption="BudgetPayableAmountId" [visible]="false">
+                                </dxi-column>
+
+                                <dxi-column dataField="BudgetPayableId" caption="BudgetPayableId" [visible]="false">
+                                </dxi-column>
+
+                                <dxi-column dataField="ProjectName" caption="Project">
+                                    <dxo-lookup [dataSource]="projectList" displayExpr="ProjectName" valueExpr="ProjectName"></dxo-lookup>
+                                </dxi-column>
+
+                                <dxi-column dataField="BudgetLineName" caption="B/L Type">
+                                </dxi-column>
+
+                                <dxi-column dataField="PaymentDate" caption="Payment Date" dataType="date">
+                                </dxi-column>
+
+                                <dxi-column dataField="Amount" caption="Amount" alignment="right" datatype="number" [setCellValue]="setStateValue">
+                                    <dxi-validation-rule type="required" [pattern]="pattern" message="message"></dxi-validation-rule>
+                                </dxi-column>
+                                <!-- <div *dxTemplate="let d of 'diffCellTemplate'">
+                                    <dx-number-box [min]="0" [max]="SelectedRowAmount" [showSpinButtons]="true" [showClearButton]="true">
+                                    </dx-number-box>
+                                </div> -->
+
+                                <dxi-column dataField="Remark" caption="Remark" alignment="right">
+                                </dxi-column>
+
+                            </dx-data-grid>
+                        </div>
+                    </div>
+
+                    <!-- Tab 4  -->
+                    <div *ngIf="openInfoTab==3">
+                        <br>
+                        <br>
+                        <div class="pro-accordian-outer">
+                            <div class="panel-group" id="accordion">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading active-task-bg">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Active task card</a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapse1" class="panel-collapse collapse in">
+                                        <div class="panel-body">
+                                            <h3>Humanitarian Assistance</h3>
+                                            <div class="form-group">
+                                                <textarea class="form-control" placeholder="Task Description"></textarea>
+                                            </div>
+                                            <div class="pro-activity-listing">
+                                                <ul>
+                                                    <li>
+                                                        <a href="#">Upload EOI</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">Upload EOI lorem ipsum</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">Upload EOI</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">Upload EOI lorem ipsum</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="commnt-link text-right">
+                                                <span (click)="ActiveComments()">Comments
+                                                    <i class="fa fa-commenting" aria-hidden="true"></i>
+                                                </span>
+                                            </div>
+
+                                            <div class="active-task-bottom" *ngIf="ShowCommentsActive==true">
+                                                <ul class="pro-comments-list">
+                                                    <li>
+                                                        <h4>John Doe
+                                                            <span>20/July/2017</span>
+                                                        </h4>
+                                                        <p>We are requesting you that please put some dummy contents fo the
+                                                            comments. Lorem is defined on 1985.</p>
+                                                    </li>
+                                                    <li>
+                                                        <h4>Lorem colin
+                                                            <span>20/July/2017</span>
+                                                        </h4>
+                                                        <p>We are requesting you that please put some dummy contents fo the
+                                                            comments. Lorem is defined on 1985.</p>
+                                                    </li>
+                                                    <li>
+                                                        <h4>John Doe
+                                                            <span>20/July/2017</span>
+                                                        </h4>
+                                                        <p>We are requesting you that please put some dummy contents fo the
+                                                            comments. Lorem is defined on 1985.</p>
+                                                    </li>
+                                                    <li>
+                                                        <h4>Lorem colin
+                                                            <span>20/July/2017</span>
+                                                        </h4>
+                                                        <p>We are requesting you that please put some dummy contents fo the
+                                                            comments. Lorem is defined on 1985.</p>
+                                                    </li>
+
+                                                </ul>
+                                                <div class="form-group">
+                                                    <textarea class="form-control"></textarea>
+                                                </div>
+                                                <div class="sv-cancel-btn">
+                                                    <button class="task-save-btn">
+                                                        <i class="fa fa-check" aria-hidden="true"></i>
+                                                    </button>
+                                                    <button class="task-cancel-btn">
+                                                        <i class="fa fa-times" aria-hidden="true"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading inactive-task-bg">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" class="collapsed" data-parent="#accordion" href="#collapse2">Inactive task card</a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapse2" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <h3>Title Code</h3>
+                                            <div class="form-group">
+                                                <textarea class="form-control" placeholder="Task Description"></textarea>
+                                            </div>
+                                            <div class="pro-activity-listing">
+                                                <ul>
+                                                    <li>
+                                                        <a href="#">Upload EOI</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">Upload EOI lorem ipsum</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">Upload EOI</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">Upload EOI lorem ipsum</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="commnt-link text-right">
+                                                <span (click)="InActiveComments()">Comments
+                                                    <i class="fa fa-commenting" aria-hidden="true"></i>
+                                                </span>
+                                            </div>
+
+                                            <div class="active-task-bottom" *ngIf="ShowCommentsInActive==true">
+                                                <ul class="pro-comments-list">
+                                                    <li>
+                                                        <h4>John Doe
+                                                            <span>20/July/2017</span>
+                                                        </h4>
+                                                        <p>We are requesting you that please put some dummy contents fo the
+                                                            comments. Lorem is defined on 1985.</p>
+                                                    </li>
+                                                    <li>
+                                                        <h4>Lorem colin
+                                                            <span>20/July/2017</span>
+                                                        </h4>
+                                                        <p>We are requesting you that please put some dummy contents fo the
+                                                            comments. Lorem is defined on 1985.</p>
+                                                    </li>
+                                                    <li>
+                                                        <h4>John Doe
+                                                            <span>20/July/2017</span>
+                                                        </h4>
+                                                        <p>We are requesting you that please put some dummy contents fo the
+                                                            comments. Lorem is defined on 1985.</p>
+                                                    </li>
+                                                    <li>
+                                                        <h4>Lorem colin
+                                                            <span>20/July/2017</span>
+                                                        </h4>
+                                                        <p>We are requesting you that please put some dummy contents fo the
+                                                            comments. Lorem is defined on 1985.</p>
+                                                    </li>
+
+                                                </ul>
+                                                <div class="form-group">
+                                                    <textarea class="form-control"></textarea>
+                                                </div>
+                                                <div class="sv-cancel-btn">
+                                                    <button class="task-save-btn">
+                                                        <i class="fa fa-check" aria-hidden="true"></i>
+                                                    </button>
+                                                    <button class="task-cancel-btn">
+                                                        <i class="fa fa-times" aria-hidden="true"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Add Project Popup -->
+
+<dx-popup class="popup ad-project-popup-outer" [width]="600" [height]="250" [showTitle]="true" title="Add Project" [dragEnabled]="false"
+    [closeOnOutsideClick]="false" [shading]="true" shadingColor="rgba(0, 0, 0, 0.5)" [(visible)]="popupVisible">
+    <div *dxTemplate="let data of 'content'">
+        <form action="your-action" (submit)="AddEditProjectDetails(projectModel)">
+            <dx-form [showColonAfterLabel]="true" [formData]="projectModel" [colCount]='2' [readOnly]="false" [showColonAfterLabel]="true"
+                [showValidationSummary]="true" validationGroup="customerData">
+
+                <dxi-item dataField="ProjectName">
+                    <dxi-validation-rule type="required"></dxi-validation-rule>
+                </dxi-item>
+                <dxi-item dataField="Description">
+                    <dxi-validation-rule type="required"></dxi-validation-rule>
+                </dxi-item>
+                <dxi-item dataField="StartDate" editorType="dxDateBox" [editorOptions]="{ width: '100%'}">
+                    <dxi-validation-rule type="required"></dxi-validation-rule>
+                </dxi-item>
+                <dxi-item dataField="EndDate" editorType="dxDateBox" [editorOptions]="{ width: '100%'}">
+                    <dxi-validation-rule type="required"></dxi-validation-rule>
+                </dxi-item>
+                <dxi-item dataField="CurrencyId" caption="Currency" editorType="dxSelectBox" [editorOptions]="{ dataSource: currencyModel, caption:'Currency', value: CurrencyId, displayExpr: 'CurrencyCode', valueExpr: 'CurrencyId' }">
+                    <dxi-validation-rule type="required"></dxi-validation-rule>
+                </dxi-item>
+                <dxi-item dataField="Budget">
+                    <dxi-validation-rule type="required"></dxi-validation-rule>
+                </dxi-item>
+                <dxi-item dataField="ReceivableAmount">
+                    <dxi-validation-rule type="required"></dxi-validation-rule>
+                </dxi-item>
+                <dxi-item dataField="PayableAmount">
+                    <dxi-validation-rule type="required"></dxi-validation-rule>
+                </dxi-item>
+                <dxi-item dataField="CurrentBalance">
+                    <dxi-validation-rule type="required"></dxi-validation-rule>
+                </dxi-item>
+                <dxi-item dataField="Status" editorType="dxSelectBox" [editorOptions]="{ dataSource: Status, value: Id, displayExpr: 'Value', valueExpr: 'Id' }">
+                    <dxi-validation-rule type="required"></dxi-validation-rule>
+                </dxi-item>
+
+            </dx-form>
+            <br />
+            <div class="btn-grp-wrap">
+                <dx-button text="Save" type="success" validationGroup="customerData" [useSubmitBehavior]="true"></dx-button>
+                <dx-button text="Cancel" (onClick)="HidePopup()"></dx-button>
+            </div>
+        </form>
+    </div>
+</dx-popup>

@@ -1,0 +1,54 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div class="main-heading clearfix">
+      <h3 class="page-heading"> Project Budget & Budget Line </h3>
+    </div>
+  </div>
+  <div class="col-sm-12">
+    <div id="tabs" class="pro-budget-tab-outer">
+      <!-- <dx-tabs #apiTabs [dataSource]="tabs" [selectedIndex]="0" (onItemClick)="selectTab($event)"></dx-tabs> -->
+
+      <div *ngIf="showSelectedTab==0">
+        <dx-data-grid id="gridContainer" [dataSource]="projectBudget" [allowColumnReordering]="true" [allowColumnResizing]="true"
+          [columnAutoWidth]="true" (onEditingStart)="logEvent('EditingStart',$event)" (onInitNewRow)="logEvent('InitNewRow',$event)"
+          (onRowInserting)="logEvent('RowInserting',$event)" (onRowInserted)="logEvent('RowInserted',$event)" (onRowUpdating)="logEvent('RowUpdating',$event)"
+          (onRowUpdated)="logEvent('RowUpdated',$event)" (onRowRemoving)="logEvent('RowRemoving',$event)" (onRowRemoved)="logEvent('RowRemoved',$event)">
+          <dxo-paging [pageSize]="10"></dxo-paging>
+          <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5, 10, 20]" [showInfo]="true"></dxo-pager>
+          <dxo-filter-row [visible]="true"></dxo-filter-row>
+          <dxo-header-filter [visible]="true"></dxo-header-filter>
+          <dxo-editing mode="popup" [allowUpdating]="true" [allowAdding]="true" [form]="{
+                items: ['ProjectId','ReceivableAmount','PayableAmount','StartDate','EndDate']
+            }">
+            <dxo-popup title="Add/Edit Project Budget" [showTitle]="true" [width]="700" [height]="345" [position]="{ my: 'center', at: 'center', of: windows }"></dxo-popup>
+          </dxo-editing>
+          <dxi-column dataField="ProjectId" caption="Project">
+            <dxo-lookup [dataSource]="projectList" displayExpr="ProjectName" valueExpr="ProjectId"></dxo-lookup>
+          </dxi-column>
+
+          <dxi-column dataField="ReceivableAmount" caption="Amount Receivable" alignment="right">
+          </dxi-column>
+
+          <dxi-column dataField="PayableAmount" caption="Amount Payable" alignment="right">
+          </dxi-column>
+
+          <dxi-column dataField="CurrentBalance" caption="Current Balance" alignment="right">
+          </dxi-column>
+
+          <dxi-column dataField="StartDate" caption="Start Date" dataType="date">
+          </dxi-column>
+
+          <dxi-column dataField="EndDate" caption="End Date" dataType="date">
+          </dxi-column>
+
+          <dxi-column dataField="BudgetLine" caption="Budget Line" cellTemplate="CellTemplateBudgetLine"></dxi-column>
+          <div *dxTemplate="let data of 'CellTemplateBudgetLine'">
+            <a href="javascript:void(0);" (click)="sendRowData(data)">Budget Line</a>
+          </div>
+        </dx-data-grid>
+      </div>
+
+      <div *ngIf="showSelectedTab==1">{{COntent}}</div>
+      <div *ngIf="showSelectedTab==2">{{COntent}}</div>
+    </div>
+  </div>

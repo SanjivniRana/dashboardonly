@@ -1,0 +1,8 @@
+git init
+git config --global user.name SanjivniRana
+git config --global user.email sanjivnirana@gmail.com
+git config --global credentials.helper wincred
+git remote add origin https://github.com/SanjivniRana/erplts.git
+git push -u origin master
+git clone https://github.com/SanivniRana/
+git remote set-url origin https://github.com/SanjivniRana/erplts.git

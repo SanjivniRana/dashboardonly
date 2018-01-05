@@ -1,0 +1,66 @@
+<br>
+<br>
+
+
+<div class="row">
+  <div class="col-sm-12">
+    <dx-form id="form"           
+      [readOnly]="false"
+      [showColonAfterLabel]="true"
+      [showValidationSummary]="true"
+      [minColWidth]="233"
+      colCount="auto">
+
+      <dxi-item dataField="Office" editorType="dxSelectBox" [editorOptions]="{ dataSource: officeType, displayExpr: 'OfficeTypeName', valueExpr: 'OfficeTypeId'  }">
+        <dxi-validation-rule type="required" message="Office"></dxi-validation-rule>
+      </dxi-item>
+
+      <dxi-item dataField="Month" editorType="dxDateBox">
+          <dxi-validation-rule 
+              type="required"
+              message="Month is required">
+          </dxi-validation-rule>
+      </dxi-item>
+    </dx-form>
+
+    <div class="btn"  align="center">
+      <dx-button
+        class="button-info btn btn-default btn-green"
+        text="View"
+       [routerLink]="['../projects']">
+      </dx-button> 
+    </div>
+  </div>
+</div>
+
+
+
+<div class="row">
+  <div class="col-sm-12">
+      <div class="main-heading clearfix">
+          <h3 class="page-heading"> Leave Register </h3>
+          <dx-button class="button-info btn btn-default btn-green" text="Invalidate">
+          </dx-button>
+      </div>
+  </div>
+
+  <div class="col-sm-12">
+      <div>
+          <dx-data-grid id="gridContainer" [dataSource]="dataSource" [allowColumnReordering]="true" [allowColumnResizing]="true" [columnAutoWidth]="true">
+
+              <dxo-header-filter [visible]="true"></dxo-header-filter>
+              <dxo-filter-row [visible]="true"></dxo-filter-row>
+              <dxo-selection mode="multiple"></dxo-selection>
+              <dxo-editing mode="popup" [allowUpdating]="false"></dxo-editing>
+              
+              <dxi-column dataField="Code" caption="Code"></dxi-column>
+              <dxi-column dataField="EmployeeName" caption="Employee Name"></dxi-column>
+              <dxi-column dataField="Designation" caption="Designation"></dxi-column>
+              <dxi-column dataField="FilterType" caption="Filter Type"></dxi-column>
+             
+              <dxo-paging [pageSize]="10"></dxo-paging>
+              <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
+          </dx-data-grid>
+      </div>
+  </div>
+</div>

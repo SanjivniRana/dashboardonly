@@ -1,0 +1,255 @@
+<nav class="navbar navbar-inverse navbar-fixed-left" [ngClass]="{'close-left-bar': toggle}">
+    <div class="container">
+        <div id="navbar" class=" left-sidebar">
+            <ul class="nav navbar-nav">
+                <li (click)="toggleSideFun()" title="User">
+                    <a [routerLink]="['./admin/user']">
+                        <span>
+                            <i class="fa fa-user"></i>
+                        </span> User</a>
+                </li>
+                <li class="dropdown" title="Code">
+                    <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <span>
+                            <i class="fa fa-code"></i>
+                        </span> Code
+                        <i class="fa fa-angle-down pull-right"></i>
+                    </a>
+                    <ul class="dropdown-menu sec-drop-fix">
+                        <li (click)="toggleSideFun()">
+                            <a [routerLink]="['./code/chart-of-accounts']">Charts Of Accounts</a>
+                        </li>
+                        <li (click)="toggleSideFun()">
+                            <a [routerLink]="['./code/journal-code']">Journal Codes</a>
+                        </li>
+                        <li (click)="toggleSideFun()">
+                            <a [routerLink]="['./code/currency-code']">Currency Codes</a>
+                        </li>
+                        <li (click)="toggleSideFun()">
+                            <a [routerLink]="['./code/office-code']">Office Codes</a>
+                        </li>
+                        <li (click)="toggleSideFun()">
+                            <a [routerLink]="['./code/analytical-codes']">Analytical Codes</a>
+                        </li>
+                        <li (click)="toggleSideFun()">
+                            <a [routerLink]="['./code/email-setting']">Email Settings</a>
+                        </li>
+                        <li (click)="toggleSideFun()">
+                            <a [routerLink]="['./code/exchange-rate']">Exchange Rate</a>
+                        </li>
+                        <li (click)="toggleSideFun()">
+                            <a [routerLink]="['./code/project-budget']">Project Budget & Budget Line</a>
+                        </li>
+                        <li (click)="toggleSideFun()">
+                            <a [routerLink]="['./code/leavereason-type']">Leave Reason</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown" title="Accounts">
+                    <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <span>
+                            <i class="fa fa-money"></i>
+                        </span> Accounts
+                        <i class="fa fa-angle-down pull-right"></i>
+                    </a>
+                    <ul class="dropdown-menu sec2-drop-fix">
+                        <li (click)="toggleSideFun()">
+                            <a [routerLink]="['./accounts/vouchers']">Vouchers</a>
+                        </li>
+                        <li role="separator" class="divider"></li>
+                        <li (click)="toggleSideFun()">
+                            <a [routerLink]="['./accounts/journal']">Journal</a>
+                        </li>
+                        <li (click)="toggleSideFun()">
+                            <a [routerLink]="['./accounts/ledger']">Ledger Statement</a>
+                        </li>
+                        <li (click)="toggleSideFun()">
+                            <a [routerLink]="['./accounts/budgetbalance']">Budget Balance</a>
+                        </li>
+                        <li (click)="toggleSideFun()">
+                            <a [routerLink]="['./accounts/trialbalance']">Trial Balance</a>
+                        </li>
+                        <li (click)="toggleSideFun()">
+                            <a [routerLink]="['./accounts/advanceDeduction']">Advance Deduction</a>
+                        </li>
+                        <li role="separator" class="divider"></li>
+                        <li (click)="toggleSideFun()">
+                            <a [routerLink]="['./accounts/financialreport']">Financial Report</a>
+                        </li>
+                        <!-- <li><a href="javascript:void(0)">Set Financial Year</a></li> -->
+                    </ul>
+                </li>
+                <!-- <li *ngxPermissionsOnly = "['SuperAdmin','Admin']" class="dropdown"> -->
+                <li class="dropdown" title="HR">
+                    <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <span>
+                            <i class="fa fa-users"></i>
+                        </span> HR
+                        <i class="fa fa-angle-down pull-right"></i>
+                    </a>
+                    <ul class="dropdown-menu third-drop-fix">
+                        <li (click)="toggleSideFun()">
+                            <a [routerLink]="['./hr/employees']">Employees</a>
+                        </li>
+                        <li (click)="toggleSideFun()">
+                            <a [routerLink]="['./hr/prospective-employees']">Prospective Employees</a>
+                        </li>
+                        <li role="separator" class="divider"></li>
+                        <li (click)="toggleSideFun()">
+                            <a [routerLink]="['./hr/advances']">Advances</a>
+                        </li>
+                        <li (click)="toggleSideFun()">
+                            <a [routerLink]="['./hr/leave-register']">Monthly Leaves Register</a>
+                        </li>
+                        <li (click)="toggleSideFun()">
+                            <a [routerLink]="['./hr/payroll']">Monthly Payroll Sheet</a>
+                        </li>
+                        <li (click)="toggleSideFun()">
+                            <a [routerLink]="['./hr/payroll-monthly-hours']">Payroll Monthly Hours</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown" title="Store">
+                    <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <span>
+                            <i class="fa fa-shopping-cart"></i>
+                        </span> Store
+                        <i class="fa fa-angle-down pull-right"></i>
+                    </a>
+                    <ul class="dropdown-menu forth-drop-fix">
+                        <li (click)="toggleSideFun()">
+                            <a href="javascript:void(0)">Store Source Codes</a>
+                        </li>
+                        <li role="separator" class="divider"></li>
+                        <li (click)="toggleSideFun()">
+                            <a href="javascript:void(0)">Consumables</a>
+                        </li>
+                        <li (click)="toggleSideFun()">
+                            <a href="javascript:void(0)">Expandables</a>
+                        </li>
+                        <li (click)="toggleSideFun()">
+                            <a href="javascript:void(0)">Non-Expandables</a>
+                        </li>
+                        <li (click)="toggleSideFun()">
+                            <a href="javascript:void(0)">Depreciation</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown" title="General">
+                    <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <span>
+                            <i class="fa fa-info-circle"></i>
+                        </span> General
+                        <i class="fa fa-angle-down pull-right"></i>
+                    </a>
+                    <ul class="dropdown-menu fifth-drop-fix">
+                        <li (click)="toggleSideFun()">
+                            <a href="javascript:void(0)">Monthly Exchange Rate</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown" title="Planning">
+                    <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <span>
+                            <i class="fa fa-area-chart"></i>
+                        </span> Planning
+                        <i class="fa fa-angle-down pull-right"></i>
+                    </a>
+                    <ul class="dropdown-menu six-drop-fix">
+                        <li (click)="toggleSideFun()">
+                            <a href="javascript:void(0)">New Opportunities(Stage 1)</a>
+                        </li>
+                        <li (click)="toggleSideFun()">
+                            <a href="javascript:void(0)">Director</a>
+                        </li>
+                        <li (click)="toggleSideFun()">
+                            <a href="javascript:void(0)">New Opportunities(Stage 2)</a>
+                        </li>
+                        <li (click)="toggleSideFun()">
+                            <a href="javascript:void(0)">Admin Finance</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown" title="Logistic Plan">
+                    <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <span>
+                            <i class="fa fa-bar-chart"></i>
+                        </span> Logistic Plan
+                        <i class="fa fa-angle-down pull-right"></i>
+                    </a>
+                    <ul class="dropdown-menu seven-drop-fix">
+                        <li (click)="toggleSideFun()">
+                            <a href="javascript:void(0)">PMU</a>
+                        </li>
+                        <li (click)="toggleSideFun()">
+                            <a href="javascript:void(0)">Director</a>
+                        </li>
+                        <li (click)="toggleSideFun()">
+                            <a href="javascript:void(0)">General Assembly</a>
+                        </li>
+                        <li (click)="toggleSideFun()">
+                            <a href="javascript:void(0)">Admin & Finance Manager</a>
+                        </li>
+                        <li (click)="toggleSideFun()">
+                            <a href="javascript:void(0)">Field Office Manager</a>
+                        </li>
+                        <li (click)="toggleSideFun()">
+                            <a href="javascript:void(0)">HR</a>
+                        </li>
+                        <li (click)="toggleSideFun()">
+                            <a href="javascript:void(0)">Logistic </a>
+                        </li>
+                        <li (click)="toggleSideFun()">
+                            <a href="javascript:void(0)">Inventory</a>
+                        </li>
+                        <li (click)="toggleSideFun()">
+                            <a href="javascript:void(0)">Finance</a>
+                        </li>
+                        <li (click)="toggleSideFun()">
+                            <a href="javascript:void(0)">Control</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown" title="Transport">
+                    <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <span>
+                            <i class="fa fa-bus"></i>
+                        </span> Transport
+                        <i class="fa fa-angle-down pull-right"></i>
+                    </a>
+                    <ul class="dropdown-menu eight-drop-fix">
+                        <li (click)="toggleSideFun()">
+                            <a href="javascript:void(0)">Vehicle</a>
+                        </li>
+                        <li (click)="toggleSideFun()">
+                            <a href="javascript:void(0)">Generator</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown" title="PMU">
+                    <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <span>
+                            <i class="fa fa-user"></i>
+                        </span> PMU
+                        <i class="fa fa-angle-down pull-right"></i>
+                    </a>
+                    <ul class="dropdown-menu nine-drop-fix">
+                        <li (click)="toggleSideFun()">
+                            <a [routerLink]="['./pmu/projects']">Projects</a>
+                        </li>
+                        <li (click)="toggleSideFun()">
+                            <a [routerLink]="['./pmu/implementation']">Implementation</a>
+                        </li>
+                        <li (click)="toggleSideFun()">
+                            <a [routerLink]="['./pmu/monitoring']">Monitoring</a>
+                        </li>
+                        <li (click)="toggleSideFun()">
+                            <a [routerLink]="['./pmu/task-activity']">Task & Activity</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- /sidebar end -->
